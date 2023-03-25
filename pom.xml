@@ -16,6 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>11.0.2</version>
@@ -60,7 +66,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.avignon.university.one4all/com.avignon.university.one4all.HelloApplication
+                            <mainClass>com.avignon.university.one4all/com.avignon.university.one4all.Main
                             </mainClass>
                         </configuration>
                     </execution>
