@@ -1,0 +1,41 @@
+*{
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.header{
+    -fx-background-color: #fff;
+    -fx-border-color: #000;
+    -fx-border-width: .2px .2px .4px .2px;
+}
+
+.yes-btn{
+    -fx-background-color: #962934;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.yes-btn:hover{
+    -fx-background-color: #d33d63;
+}
+
+
+.no-btn{
+    -fx-background-color: #337254;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.no-btn:hover{
+    -fx-background-color: #3ea185;
+}
+
+.bg-white{
+    -fx-background-color: #fff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,.3), 8, 0, 0, 0);
+    -fx-background-radius: 8px;
+}
+

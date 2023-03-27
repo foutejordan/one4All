@@ -1,0 +1,42 @@
+.close-btn, .minimize-btn{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close-btn:hover{
+    -fx-background-color: #ff5151;
+}
+
+.minimize-btn:hover{
+    -fx-background-color: #c5273f;
+}
+
+.textfield{
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-border-color: #d63333;
+    -fx-border-width: 0 0 .4px 0;
+    -fx-font-size: 13px;
+}
+
+.textfield:focused{
+    -fx-border-color: #fb6363;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.login-btn{
+    -fx-background-color: linear-gradient(to bottom right, #35529d, #2371d0);
+    -fx-background-raduis: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.login-btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #3862c2, #4284d0);
+}
+
+.hyperlink:hover{
+    -fx-text-fill: #ff3f3f;
+}
+
