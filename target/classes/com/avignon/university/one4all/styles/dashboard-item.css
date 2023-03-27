@@ -1,0 +1,62 @@
+*{
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.bg-white{
+    -fx-background-color: #fff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,.3), 8, 0, 0, 0);
+    -fx-background-radius: 8px;
+}
+
+.bg-white:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,.5), 8, 0, 0, 0);
+}
+
+.card-sejours{
+    -fx-background-color: linear-gradient(to right, #2b428c, #2e58ab);
+    -fx-background-radius: 0 10px 10px 0;
+}
+
+.card-sejours-left{
+    -fx-background-color: linear-gradient(to right, #1f2f80, #2b428c);
+}
+
+.card-encours{
+    -fx-background-color: linear-gradient(to right, #772d90, #a42fb8);
+    -fx-background-radius: 0 10px 10px 0;
+}
+
+.card-encours-left{
+    -fx-background-color: linear-gradient(to right, #641f7f, #772d90);
+}
+
+.card-disponible{
+    -fx-background-color: linear-gradient(to right, #9d2249, #cc1c5a);
+    -fx-background-radius: 0 10px 10px 0;
+}
+
+.card-disponible-left{
+    -fx-background-color: linear-gradient(to right, #891a41, #9d2249);
+}
+
+.card-reservation{
+    -fx-background-color: linear-gradient(to right, #FF5948, #930f02);
+    -fx-background-radius: 0 10px 10px 0;
+}
+
+.card-reservation-left{
+    -fx-background-color: linear-gradient(to right, #b44333, #FF5948);
+}
+
+.card-montant{
+    -fx-background-color: linear-gradient(to right, #FFA32B, #704903);
+    -fx-background-radius: 0 10px 10px 0;
+}
+
+.card-montant-left{
+    -fx-background-color: linear-gradient(to right, #b98039, #FFA32B);
+}
+
+.card:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, .5), 5, 0, 0, 0);
+}

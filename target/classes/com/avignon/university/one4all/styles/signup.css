@@ -1,0 +1,28 @@
+.close-btn, .minimize-btn{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close-btn:hover{
+    -fx-background-color: #ff5151;
+}
+
+.minimize-btn:hover{
+    -fx-background-color: #c5273f;
+}
+
+.hyperlink:hover{
+    -fx-text-fill: #ff3f3f;
+}
+
+.signup-btn{
+    -fx-background-color: linear-gradient(to bottom right, #3e785c, #399a73);
+    -fx-background-raduis: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.signup-btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #4d9a76, #45b796);
+}

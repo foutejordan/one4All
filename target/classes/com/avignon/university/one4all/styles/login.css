@@ -1,0 +1,28 @@
+.close-btn, .minimize-btn{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close-btn:hover{
+    -fx-background-color: #ff5151;
+}
+
+.minimize-btn:hover{
+    -fx-background-color: #c5273f;
+}
+
+.login-btn{
+    -fx-background-color: linear-gradient(to bottom right, #35529d, #2371d0);
+    -fx-background-raduis: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.login-btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #3862c2, #4284d0);
+}
+
+.hyperlink:hover{
+    -fx-text-fill: #ff3f3f;
+}

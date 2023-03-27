@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.Dashboard">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="left-anchor" stylesheets="@styles/dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="9.0" layoutY="242.0" spacing="10.0">
+               <children>
+                  <Button fx:id="dashboard_btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onMenuItemClicked" prefHeight="40.0" prefWidth="182.0" styleClass="menu-btn" stylesheets="@styles/dashboard.css" text="Dashboard">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/dashboard.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="sejours_btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onMenuItemClicked" prefHeight="40.0" prefWidth="182.0" styleClass="menu-btn" stylesheets="@styles/dashboard.css" text="Séjours">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/sejours.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="panier_btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onMenuItemClicked" prefHeight="40.0" prefWidth="182.0" styleClass="menu-btn" stylesheets="@styles/dashboard.css" text="Panier">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/panier.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="historique_btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onMenuItemClicked" prefHeight="40.0" prefWidth="182.0" styleClass="menu-btn" stylesheets="@styles/dashboard.css" text="Historique">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/historic.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="31.0" layoutY="20.0" spacing="5.0">
+               <children>
+                  <ImageView fitHeight="119.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/admin.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Welcome" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Admin" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox fx:id="logout_hbox" alignment="CENTER" layoutX="14.0" layoutY="544.0" spacing="5.0" stylesheets="@styles/dashboard.css" visible="false">
+               <children>
+                  <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#switch_login_logout" styleClass="signout-btn" stylesheets="@styles/dashboard.css">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label text="Logout" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="login_hbox" alignment="CENTER" layoutX="14.0" layoutY="544.0" spacing="5.0" stylesheets="@styles/dashboard.css">
+               <children>
+                  <Button fx:id="login_btn" mnemonicParsing="false" onAction="#switch_login_logout" styleClass="signin-btn" stylesheets="@styles/dashboard.css">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/login.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label text="Login" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane fx:id="top_anchor" prefHeight="58.0" prefWidth="942.0" styleClass="top-anchor" stylesheets="@styles/dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="14.0" layoutY="19.0" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/booking.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="23.0" prefWidth="240.0" text="One4All - Booking System">
+                     <font>
+                        <Font name="Century Gothic Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="834.0" layoutY="13.0" spacing="20.0">
+               <children>
+                  <Button fx:id="minimize_btn" mnemonicParsing="false" onMouseClicked="#minimize" styleClass="minimize-btn" stylesheets="@styles/dashboard.css">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/minimize.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="close_btn" mnemonicParsing="false" onMouseClicked="#close" styleClass="close-btn" stylesheets="@styles/dashboard.css">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/close.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="menu_title" layoutX="276.0" layoutY="20.0" prefHeight="23.0" prefWidth="240.0" textFill="#e74141">
+               <font>
+                  <Font name="Century Gothic Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane fx:id="center_anchor" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
