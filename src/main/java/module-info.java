@@ -8,5 +8,6 @@ module com.avignon.university.one4all {
     opens com.avignon.university.one4all to javafx.fxml;
     exports com.avignon.university.one4all;
     exports com.avignon.university.one4all.controllers;
+    exports com.avignon.university.one4all.models;
     opens com.avignon.university.one4all.controllers to javafx.fxml;
 }

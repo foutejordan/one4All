@@ -1,8 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="591.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.Signup">
-
+<AnchorPane prefHeight="591.0" prefWidth="742.0" styleClass="bg" stylesheets="@styles/signup.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.Signup">
+   <children>
+      <ImageView fitHeight="167.0" fitWidth="165.0" layoutX="289.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/signup.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="245.0" layoutY="217.0" spacing="20.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <TextField fx:id="username_textfield" prefHeight="38.0" prefWidth="253.0" promptText="Utilisateur" styleClass="textfield">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </TextField>
+                  <ImageView fitHeight="28.0" fitWidth="36.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/username.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="36.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/password.png" />
+                     </image>
+                  </ImageView>
+                  <PasswordField fx:id="password_textfield" layoutY="-1.0" prefHeight="38.0" prefWidth="253.0" promptText="Mot de passe" styleClass="textfield">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </PasswordField>
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <PasswordField fx:id="password_textfield1" prefHeight="38.0" prefWidth="253.0" promptText="Repetez mot de passe" styleClass="textfield">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </PasswordField>
+                  <ImageView fitHeight="28.0" fitWidth="36.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/password.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <VBox>
+               <children>
+                  <Label text="Rôle" textFill="#c3acac">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="roles_choicebox" prefHeight="38.0" prefWidth="253.0">
+                     <styleClass>
+                        <String fx:value="textfield" />
+                        <String fx:value="roles-choice-box" />
+                     </styleClass>
+                  </ChoiceBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Button layoutX="336.0" layoutY="477.0" mnemonicParsing="false" styleClass="signup-btn" text="S'inscrire" />
+      <Hyperlink fx:id="create_account_btn" layoutX="238.0" layoutY="529.0" onAction="#onLoginclicked" text="Vous avez déjà un compte? Connectez-vous" />
+   </children>
 </AnchorPane>

@@ -5,12 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import com.github.javafaker.Faker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -66,6 +64,12 @@ public class Dashboard implements Initializable {
     @FXML
     private Label menu_title;
 
+    @FXML
+    private Hyperlink signin_hyperlink;
+
+    @FXML
+    private Hyperlink signout_hyperlink;
+
     public static Stage pStage;
 
 
@@ -77,6 +81,9 @@ public class Dashboard implements Initializable {
     public  SejoursItem sejoursItemController = null;
     public  HistoriqueItem historiqueItemController = null;
     public  PanierItem panierItemController = null;
+
+    public  Signin signinController = null;
+    public  Signup signupController = null;
 
     protected void testJavaFaker(){
         Faker faker = new Faker();
@@ -206,6 +213,44 @@ public class Dashboard implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    public void initSignin(){
+        center_anchor.getChildren().clear();
+        try {
+            menu_title.setText(": Connexion");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("signin.fxml"));
+            Node node = loader.load();
+            signinController = loader.getController();
+            signinController.isCreateAccountClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult){
+                    initSignup();
+                }
+            });
+            center_anchor.getChildren().add(node);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initSignup(){
+        center_anchor.getChildren().clear();
+        try {
+            menu_title.setText(": Création compte");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("signup.fxml"));
+            Node node = loader.load();
+            signupController = loader.getController();
+            signupController.isLoginClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult){
+                    initSignin();
+                }
+            });
+            center_anchor.getChildren().add(node);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @FXML
     public void minimize(){
         Stage stage = (Stage) top_anchor.getScene().getWindow();
@@ -218,10 +263,18 @@ public class Dashboard implements Initializable {
 
     @FXML
     public void switch_login_logout(ActionEvent event){
-        Button source = (Button) event.getSource();
+        if (event.getSource() == login_btn || event.getSource() == signin_hyperlink){
+            login_hbox.setVisible(false);
+            initSignin();
+        }else if(event.getSource() == logout_btn || event.getSource() == signout_hyperlink){
+            logout_hbox.setVisible(false);
+        }
 
-        login_hbox.setVisible(!(source == login_btn));
-        logout_hbox.setVisible(!(source == logout_btn));
+    }
+
+    @FXML
+    public void switch_signin_signup(){
+
     }
 
     @FXML

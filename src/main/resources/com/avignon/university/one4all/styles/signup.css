@@ -1,14 +1,16 @@
-.close-btn, .minimize-btn{
-    -fx-background-color: transparent;
-    -fx-cursor: hand;
+*{
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
-.close-btn:hover{
-    -fx-background-color: #ff5151;
+.bg{
+    -fx-background-color: linear-gradient(to top right, #1e242e, #ae2d3c);
 }
 
-.minimize-btn:hover{
-    -fx-background-color: #c5273f;
+.hyperlink{
+    -fx-underline: false;
+    -fx-text-fill: #fb6363;
+    -fx-border-radius: 0;
+    -fx-border-width: 0px;
 }
 
 .hyperlink:hover{
@@ -20,7 +22,7 @@
     -fx-text-fill: #fff;
     -fx-border-color: #d63333;
     -fx-border-width: 0 0 .4px 0;
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
 }
 
 .textfield:focused{
@@ -38,4 +40,22 @@
 
 .signup-btn:hover{
     -fx-background-color: linear-gradient(to bottom right, #4d9a76, #45b796);
+}
+
+.roles-choice-box{
+    -fx-mark-color: #d63333;
+}
+
+.choice-box .context-menu{
+    -fx-min-width: 253px;
+    -fx-background-color: linear-gradient(to top right, #1e242e, #ae2d3c);
+}
+
+.choice-box .menu-item .label{
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #fb6363;
 }
