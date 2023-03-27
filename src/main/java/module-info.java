@@ -3,6 +3,7 @@ module com.avignon.university.one4all {
     requires javafx.fxml;
     requires javafaker;
     requires java.sql;
+    requires org.xerial.sqlitejdbc;
 
 
     opens com.avignon.university.one4all to javafx.fxml;
