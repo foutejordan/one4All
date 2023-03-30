@@ -2,6 +2,7 @@ package com.avignon.university.one4all;
 
 import com.avignon.university.one4all.controllers.Dashboard;
 import com.avignon.university.one4all.models.dao.CRUDHelper;
+import com.avignon.university.one4all.models.dao.SignupModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -43,7 +44,7 @@ public class Main extends Application {
 
         stage.show();
         checkDrivers();
-        insertPerson("jordan", "jordan@gmail.com");
+        System.out.println(SignupModel.signup("jordqn", "123", 1));
         CRUDHelper.selectUser();
     }
 
@@ -62,27 +63,5 @@ public class Main extends Application {
             Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Could not start SQLite Drivers");
             return false;
         }
-    }
-    public static void insertPerson(String username, String password) {
-        //update database
-        int id = (int) CRUDHelper.create(
-                "User",
-                new String[]{"username", "password"},
-                new Object[]{username, password},
-                new int[]{Types.VARCHAR, Types.VARCHAR});
-    }
-
-    private static Connection connect(String location) {
-        String dbPrefix = "jdbc:sqlite:";
-        Connection connection;
-        try {
-            connection = DriverManager.getConnection(dbPrefix + location);
-        } catch (SQLException exception) {
-            Logger.getAnonymousLogger().log(Level.SEVERE,
-                    LocalDateTime.now() + ": Could not connect to SQLite DB at " +
-                            location);
-            return null;
-        }
-        return connection;
     }
 }

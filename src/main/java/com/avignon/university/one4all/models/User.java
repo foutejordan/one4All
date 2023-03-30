@@ -1,13 +1,26 @@
 package com.avignon.university.one4all.models;
 
 public class User {
-    public int id;
-    public String username;
-    public String password;
-    public String image;
 
-    public User(String username, String password) {
-        this.username = username;
+    public String login;
+    public String password;
+    public int role;
+
+    public User(String login, String password, int role) {
+        this.login = login;
         this.password = password;
+        this.role = role;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getRole() {
+        return role;
     }
 }
