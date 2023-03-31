@@ -48,4 +48,32 @@ public class SejourModel {
 
         return sejours;
     }
+
+    public static Sejour readSejourbyID(int id) {
+        String query = "SELECT * FROM  Sejour WHERE id =" + id;
+        Sejour sejour = null;
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                int idHote = rs.getInt("idHote");
+                Date date_debut = rs.getDate("date_debut");
+                Date date_fin = rs.getDate("date_debut");
+                int prix = rs.getInt("prix");
+                String lieux = rs.getString("lieux");
+                String titre = rs.getString("titre");
+                int nbrePersonnes = rs.getInt("nbrePersonnes");
+                String statut = rs.getString("statut");
+                sejour = new Sejour(idHote, date_debut, date_fin, prix, lieux, titre, nbrePersonnes, statut);
+            }
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not load Persons from database ");
+
+        }
+
+        return sejour;
+    }
 }

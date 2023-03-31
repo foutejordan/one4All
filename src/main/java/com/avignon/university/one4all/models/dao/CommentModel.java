@@ -14,28 +14,29 @@ public class CommentModel {
 
 
 
-    public int addComment(int idSejour, String message, Date date) {
+    public int addComment(int idSejour,int idUser, String message, Date date) {
         int id = (int) CRUDHelper.create(
                 "Comment",
-                new String[]{"idSejour", "message", "date"},
-                new Object[]{idSejour, message, date},
-                new int[]{Types.INTEGER, Types.VARCHAR, Types.DATE});
+                new String[]{"idSejour","idUser", "message", "date"},
+                new Object[]{idSejour,idUser, message, date},
+                new int[]{Types.INTEGER,Types.INTEGER, Types.VARCHAR, Types.DATE});
 
         return id;
     }
 
-    public ArrayList<Comment> readComments() {
-        String query = "SELECT * FROM  Comment";
+    public ArrayList<Comment> readComments(int idStay) {
+        String query = "SELECT * FROM  Comment WHERE idSejour = " + idStay;
         ArrayList<Comment> comments = new ArrayList<>();
         try (Connection connection = Database.connect("one4All.sqlite")) {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int idSejour = rs.getInt("idSejour");
+                int idUser = rs.getInt("idUser");
                 String message = rs.getString("message");
                 Date date = rs.getDate("date_debut");
 
-                comments.add(new Comment(idSejour, message, date));
+                comments.add(new Comment(idSejour,idUser, message, date));
             }
         } catch (SQLException e) {
             Logger.getAnonymousLogger().log(

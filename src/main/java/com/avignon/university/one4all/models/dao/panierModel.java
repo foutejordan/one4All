@@ -2,6 +2,7 @@ package com.avignon.university.one4all.models.dao;
 
 import com.avignon.university.one4all.models.Comment;
 import com.avignon.university.one4all.models.Panier;
+import com.avignon.university.one4all.models.Sejour;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -17,23 +18,24 @@ public class panierModel {
                 "Basket",
                 new String[]{"idSejour", "idUser"},
                 new Object[]{idSejour, idUser},
-                new int[]{Types.INTEGER, Types.VARCHAR, Types.DATE});
+                new int[]{Types.INTEGER, Types.INTEGER});
 
         return id;
     }
 
-    // Requete a completer pour selectionner les sejours avec le join
-    public ArrayList<Panier> readBasket() {
-        String query = "SELECT * FROM  Basket";
-        ArrayList<Panier> sejours = new ArrayList<>();
+
+    public ArrayList<Sejour> readBasket(int userID) {
+        String query = "SELECT * FROM  Basket WHERE idUser =" + userID;
+        ArrayList<Sejour> sejours = new ArrayList<>();
         try (Connection connection = Database.connect("one4All.sqlite")) {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int idSejour = rs.getInt("idSejour");
-                int idUser = rs.getInt("idUser");
 
-                sejours.add(new Panier(idSejour, idUser));
+                Sejour sejour = SejourModel.readSejourbyID(idSejour);
+
+                sejours.add(sejour);
             }
         } catch (SQLException e) {
             Logger.getAnonymousLogger().log(
@@ -42,4 +44,11 @@ public class panierModel {
         }
         return sejours;
     }
+
+    public static int removeSejour(int id, String tablename) {
+        int result = CRUDHelper.delete(tablename, id);
+        return result;
+    }
+
+
 }

@@ -1,7 +1,9 @@
 package com.avignon.university.one4all;
 
 import com.avignon.university.one4all.controllers.Dashboard;
+import com.avignon.university.one4all.models.User;
 import com.avignon.university.one4all.models.dao.CRUDHelper;
+import com.avignon.university.one4all.models.dao.Database;
 import com.avignon.university.one4all.models.dao.SignupModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +13,7 @@ import javafx.stage.StageStyle;
 import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,12 +43,21 @@ public class Main extends Application {
 
         stage.show();
         checkDrivers();
+        createUsersTable();
+        createStaysTable();
+        createCommentTable();
+        createBasketTable();
+
+//        alterTableSejour();
+//        alterTableComment();
+//        alterTableBasket();
         System.out.println(SignupModel.signup("jordqn", "123", 1));
-        CRUDHelper.selectUser();
+
     }
 
     public static void main(String[] args) {
         launch();
+
     }
 
 
@@ -64,4 +72,132 @@ public class Main extends Application {
             return false;
         }
     }
+
+    public static  void createUsersTable() {
+        String query1 = "CREATE TABLE Users (" +
+                "id INTEGER NOT NULL PRIMARY KEY ," +
+                "login VARCHAR," +
+                "password VARCHAR," +
+                "role INTEGER )";
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not create this table data from database ");
+        }
+    }
+
+    public static  void createStaysTable() {
+        String query1 = "CREATE TABLE Sejour (" +
+                "id INTEGER  NOT NULL PRIMARY KEY ," +
+                "idHote INTEGER ," +
+                "date_debut DATE," +
+                "date_fin DATE ," +
+                "prix INTEGER ," +
+                "lieux VARCHAR," +
+                "titre VARCHAR," +
+                "nbrePersonnes INTEGER, " +
+                "statut VARCHAR," +
+                "role INTEGER," +
+                "FOREIGN KEY (idHote) REFERENCES Users (id) )";
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not create this table data from database ");
+        }
+    }
+
+//    public void alterTableSejour() {
+//        String query1 = "ALTER TABLE Sejour " +
+//                "ADD FOREIGN KEY (idHote) REFERENCES Users (id)" +
+//                "ON DELETE SET NULL";
+//        try (Connection connection = Database.connect("one4All.sqlite")) {
+//            Statement statement = connection.createStatement();
+//            statement.executeQuery(query1);
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//            Logger.getAnonymousLogger().log(
+//                    Level.SEVERE,
+//                    LocalDateTime.now() + ": Could not create this table data from database ");
+//        }
+//    }
+
+    public static  void createCommentTable() {
+        String query1 = "CREATE TABLE Comments (" +
+                "id INTEGER  NOT NULL PRIMARY KEY ," +
+                "idUser INTEGER, " +
+                "idSejour INTEGER," +
+                "message VARCHAR(50)," +
+                "date DATE," +
+                "FOREIGN KEY (idUser) REFERENCES Users (id)," +
+                "FOREIGN KEY (idSejour) REFERENCES Sejour (id))";
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not create this table data from database ");
+        }
+    }
+
+//    public void alterTableComment() {
+//        String query1 = "ALTER TABLE Comments " +
+//                "ADD " +
+//                "ON DELETE SET NULL," +
+//                "ADD " +
+//                "ON DELETE SET NULL";
+//        try (Connection connection = Database.connect("one4All.sqlite")) {
+//            PreparedStatement statement = connection.prepareStatement(query1);
+//            statement.executeQuery();
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//            Logger.getAnonymousLogger().log(
+//                    Level.SEVERE,
+//                    LocalDateTime.now() + ": Could not create this table data from database ");
+//        }
+//    }
+
+    public static  void createBasketTable() {
+        String query1 = "CREATE TABLE Panier (" +
+                "id INTEGER  NOT NULL PRIMARY KEY ," +
+                "idSejour INTEGER," +
+                "idUser INTEGER," +
+                "FOREIGN KEY (idUser) REFERENCES Users (id)," +
+                "FOREIGN KEY (idSejour) REFERENCES Sejour (id) )";
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not create this table data from database ");
+        }
+    }
+
+//    public void alterTableBasket() {
+//        String query1 = "ALTER TABLE Panier " +
+//                "ADD FOREIGN KEY (idUser) REFERENCES Users (id)" +
+//                "ON DELETE SET NULL," +
+//                "ADD FOREIGN KEY (idSejour) REFERENCES Sejour (id)" +
+//                "ON DELETE SET NULL";
+//        try (Connection connection = Database.connect("one4All.sqlite")) {
+//            PreparedStatement statement = connection.prepareStatement(query1);
+//            statement.executeQuery();
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//            Logger.getAnonymousLogger().log(
+//                    Level.SEVERE,
+//                    LocalDateTime.now() + ": Could not create this table data from database ");
+//        }
+//    }
 }

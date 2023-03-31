@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class Database {
 
 
-    static Connection connect(String location) {
+    public static Connection connect(String location) {
         String dbPrefix = "jdbc:sqlite:";
         Connection connection;
         try {
