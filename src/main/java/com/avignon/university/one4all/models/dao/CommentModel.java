@@ -34,7 +34,7 @@ public class CommentModel {
                 int idSejour = rs.getInt("idSejour");
                 int idUser = rs.getInt("idUser");
                 String message = rs.getString("message");
-                Date date = rs.getDate("date_debut");
+                Date date = rs.getDate("date");
 
                 comments.add(new Comment(idSejour,idUser, message, date));
             }

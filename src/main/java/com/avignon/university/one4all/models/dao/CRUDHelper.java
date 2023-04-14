@@ -39,7 +39,7 @@ public class CRUDHelper {
             return null;
         }
     }
-    private static final String tableName = "User";
+    private static final String tableName = "Users";
     private static final ObservableList<User> users = null;
     public static void selectUser() {
         String query = "SELECT * FROM " + tableName;
