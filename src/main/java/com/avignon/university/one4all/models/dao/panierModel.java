@@ -45,8 +45,8 @@ public class panierModel {
         return sejours;
     }
 
-    public static int removeSejour(int id, String tablename) {
-        int result = CRUDHelper.delete(tablename, id);
+    public static int removeSejour(int id) {
+        int result = CRUDHelper.delete("Basket", id);
         return result;
     }
 
