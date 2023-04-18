@@ -79,14 +79,14 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label text="Admin" textFill="WHITE">
+                  <Label fx:id="username_lbl" text="Admin" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <HBox fx:id="logout_hbox" alignment="CENTER" layoutX="14.0" layoutY="544.0" spacing="5.0" stylesheets="@styles/dashboard.css" visible="false">
+            <HBox fx:id="logout_hbox" alignment="CENTER" layoutX="14.0" layoutY="544.0" spacing="5.0" stylesheets="@styles/dashboard.css">
                <children>
                   <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#switch_login_logout" styleClass="signout-btn" stylesheets="@styles/dashboard.css">
                      <graphic>
@@ -97,10 +97,10 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Hyperlink fx:id="signout_hyperlink" styleClass="hyperlink-signout" text="Deconnexion" />
+                  <Hyperlink fx:id="signout_hyperlink" onAction="#switch_login_logout" styleClass="hyperlink-signout" text="Deconnexion" />
                </children>
             </HBox>
-            <HBox fx:id="login_hbox" alignment="CENTER" layoutX="14.0" layoutY="544.0" spacing="5.0" stylesheets="@styles/dashboard.css">
+            <HBox fx:id="login_hbox" alignment="CENTER" layoutX="14.0" layoutY="544.0" spacing="5.0" stylesheets="@styles/dashboard.css" visible="false">
                <children>
                   <Button fx:id="login_btn" mnemonicParsing="false" onAction="#switch_login_logout" styleClass="signin-btn" stylesheets="@styles/dashboard.css">
                      <graphic>

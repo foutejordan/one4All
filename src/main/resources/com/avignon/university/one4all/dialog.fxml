@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@styles/dialog.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.Dialog">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="434.0" stylesheets="@styles/dialog.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.Dialog">
    <children>
-      <AnchorPane fx:id="fermeture" layoutX="8.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.6" prefWidth="432.4" stylesheets="@styles/dialog.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="fermeture" layoutX="8.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="434.0" stylesheets="@styles/dialog.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="13.0" layoutY="50.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
                <children>
@@ -49,6 +49,9 @@
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </Label>
                </children>
             </AnchorPane>
@@ -69,6 +72,189 @@
                   <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/no.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="header" />
+            <String fx:value="bg-white" />
+         </styleClass>
+      </AnchorPane>
+      <AnchorPane fx:id="erreur" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="171.6" prefWidth="444.4" stylesheets="@styles/dialog.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="50.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/db_error.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <HBox fx:id="erreur_header" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="433.0" spacing="10.0" styleClass="header" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/booking.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="23.0" prefWidth="240.0" text="One4All - Erreur Requête">
+                     <font>
+                        <Font name="Century Gothic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <AnchorPane layoutX="109.0" layoutY="63.0" prefHeight="32.0" prefWidth="307.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="282.0" text="Erreur lors de l'exécution de la requête?" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="erreur_ok_btn" layoutX="338.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick" styleClass="ok-btn" stylesheets="@styles/dialog.css" text="Ok">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/erreur_ok.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="header" />
+            <String fx:value="bg-white" />
+         </styleClass>
+      </AnchorPane>
+      <AnchorPane fx:id="no_user_found" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.6" prefWidth="434.0" stylesheets="@styles/dialog.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="50.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/no_user_found.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <HBox fx:id="header_no_user_found" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="433.0" spacing="10.0" styleClass="header" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/booking.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="23.0" prefWidth="240.0" text="One4All - Erreur Requête">
+                     <font>
+                        <Font name="Century Gothic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <AnchorPane layoutX="109.0" layoutY="63.0" prefHeight="32.0" prefWidth="307.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="282.0" text="Pas d'utilisateur avec ces identifiants!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="no_user_found_ok_btn" layoutX="338.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick" styleClass="ok-btn" stylesheets="@styles/dialog.css" text="Ok">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/erreur_ok.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="header" />
+            <String fx:value="bg-white" />
+         </styleClass>
+      </AnchorPane>
+      <AnchorPane fx:id="sucessfully_logged_in" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="434.0" stylesheets="@styles/dialog.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="50.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/successfully_logged_in.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <HBox fx:id="header_sucessfully_logged_in" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="433.0" spacing="10.0" styleClass="header" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/booking.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="23.0" prefWidth="240.0" text="One4All - Connexion réussi">
+                     <font>
+                        <Font name="Century Gothic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <AnchorPane layoutX="109.0" layoutY="63.0" prefHeight="32.0" prefWidth="307.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="282.0" text="Identifiants correct!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="sucessfully_logged_in_ok_btn" layoutX="338.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick" styleClass="no-btn" stylesheets="@styles/dialog.css" text="Ok">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/erreur_ok.png" />
                      </image>
                   </ImageView>
                </graphic>

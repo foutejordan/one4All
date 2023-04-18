@@ -1,7 +1,9 @@
 package com.avignon.university.one4all.controllers;
 
 import com.avignon.university.one4all.Main;
+import com.avignon.university.one4all.models.ResponseState;
 import com.avignon.university.one4all.models.Sejour;
+import com.avignon.university.one4all.models.User;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
@@ -75,8 +77,6 @@ public class Dashboard implements Initializable {
 
     public static Stage pStage;
 
-
-
     public  Dialog dialogController = null;
     public  Stage dialogStage = null;
 
@@ -89,6 +89,11 @@ public class Dashboard implements Initializable {
 
     public  Signin signinController = null;
     public  Signup signupController = null;
+
+    public User connectedUser;
+
+    @FXML
+    private Label username_lbl;
 
     protected void testJavaFaker(){
         Faker faker = new Faker();
@@ -126,12 +131,20 @@ public class Dashboard implements Initializable {
                     Stage stage = (Stage) top_anchor.getScene().getWindow();
                     stage.close();
                 }
+                clearDialog();
             });
             dialogStage.show();
         }
 
     }
 
+    public void clearDialog(){
+        if(dialogStage!=null){
+            dialogStage.close();
+            dialogStage = null;
+            dialogController = null;
+        }
+    }
     public void initDialog(){
         try {
 
@@ -262,6 +275,42 @@ public class Dashboard implements Initializable {
                     initSignup();
                 }
             });
+            signinController.isLoggedInClickedProperty().addListener((obs, oldResult, newResult)->{
+                if(dialogStage == null || dialogController == null){
+                    initDialog();
+                }
+                if(!dialogStage.isShowing()){
+                    if (newResult.state == ResponseState.ERROR){
+                        dialogController.setDialogToShow("error");
+                        dialogController.resultProperty().addListener((d_obs, d_oldResult, d_newResult)->{
+                            if (d_newResult){
+                                clearDialog();
+                            }
+                        });
+                    }else if(newResult.state == ResponseState.NOT_FOUND){
+                        dialogController.setDialogToShow("no_user_found");
+                        dialogController.resultProperty().addListener((d_obs, d_oldResult, d_newResult)->{
+                            if (d_newResult){
+                                clearDialog();
+                            }
+                        });
+                    }else{
+                        dialogController.setDialogToShow("successfully_logged_in");
+                        dialogController.resultProperty().addListener((d_obs, d_oldResult, d_newResult)->{
+                            if (d_newResult){
+                                clearDialog();
+                                User user = (User)newResult.response;
+                                setUserInfo(user);
+                                on_user_logged_in();
+
+                            }
+                        });
+
+                    }
+
+                    dialogStage.show();
+                }
+            });
             center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
@@ -294,7 +343,7 @@ public class Dashboard implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        switch_signin_signup();
+        on_app_launched();
     }
 
     @FXML
@@ -304,14 +353,39 @@ public class Dashboard implements Initializable {
             initSignin();
         }else if(event.getSource() == logout_btn || event.getSource() == signout_hyperlink){
             logout_hbox.setVisible(false);
-            initSignup();
+            clearUserInfo();
+            on_user_logged_out();
         }
     }
 
-    @FXML
-    public void switch_signin_signup(){
-        login_hbox.setVisible(false);
-        initSignin();
+    public void on_app_launched(){
+        login_hbox.setVisible(true);
+        logout_hbox.setVisible(false);
+        dashboard_btn.setVisible(false);
+        panier_btn.setVisible(false);
+        historique_btn.setVisible(false);
+        center_anchor.getChildren().clear();
+        setStyleOnClick(sejours_btn);
+        initSejoursMenuItem();
+    }
+
+    public void on_user_logged_in(){
+        logout_hbox.setVisible(true);
+        dashboard_btn.setVisible(true);
+        panier_btn.setVisible(true);
+        historique_btn.setVisible(true);
+        setStyleOnClick(dashboard_btn);
+        initDashboardMenuItem();
+    }
+
+    public void on_user_logged_out(){
+        logout_hbox.setVisible(false);
+        login_hbox.setVisible(true);
+        dashboard_btn.setVisible(false);
+        panier_btn.setVisible(false);
+        historique_btn.setVisible(false);
+        setStyleOnClick(sejours_btn);
+        initSejoursMenuItem();
     }
 
     @FXML
@@ -337,5 +411,15 @@ public class Dashboard implements Initializable {
         historique_btn.setStyle(getStyleOnClick(source, historique_btn));
         panier_btn.setStyle(getStyleOnClick(source, panier_btn));
         sejours_btn.setStyle(getStyleOnClick(source, sejours_btn));
+    }
+
+    private void setUserInfo(User user){
+        connectedUser = user;
+        username_lbl.setText(user.getLogin());
+    }
+
+    private void clearUserInfo(){
+        connectedUser = null;
+        username_lbl.setText("");
     }
 }

@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -18,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,6 +41,19 @@ public class SejoursItem implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initSejoursContainer();
     }
+
+    @FXML
+    private Button rechercher_btn;
+
+    @FXML
+    private DatePicker dateDebut_dp;
+
+    @FXML
+    private DatePicker dateFin_dp;
+
+    @FXML
+    private TextField titre_lieu_nbPersonne_tf;
+
 
     public void initSejoursContainer(){
         testJavaFaker();
@@ -123,6 +140,13 @@ public class SejoursItem implements Initializable {
 
         dataService.start();
 
+    }
+
+    @FXML
+    public void onRechercherClicked(){
+        String multi_value = titre_lieu_nbPersonne_tf.getText();
+        LocalDate dateDebut = dateDebut_dp.getValue();
+        LocalDate dateFin = dateFin_dp.getValue();
     }
 
 
