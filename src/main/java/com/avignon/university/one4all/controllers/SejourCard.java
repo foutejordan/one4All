@@ -2,6 +2,8 @@ package com.avignon.university.one4all.controllers;
 
 import com.avignon.university.one4all.Main;
 import com.avignon.university.one4all.models.Sejour;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -31,18 +33,39 @@ public class SejourCard implements Initializable {
 
     @FXML
     private Label title_lbl;
+
+    private Sejour sejour;
+
+    private final ReadOnlyObjectWrapper<Sejour> onSejourClicked = new ReadOnlyObjectWrapper<>();
+
+    public ReadOnlyObjectProperty<Sejour> onSejourClickedProperty() {
+        return onSejourClicked.getReadOnlyProperty() ;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    public void setData(Sejour sejour){
-        title_lbl.setText("Titre: "+sejour.getTitre());
-        lieu_lbl.setText("Lieu: "+sejour.getLieu());
-        nombrePersone_lbl.setText("Nombre de personnes: "+sejour.getNombrePersonnes());
-        image_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/"+sejour.getImage()))));
-        dateDebut_dp.setValue(sejour.getDateDebut().toLocalDate());
-        dateFin_dp.setValue(sejour.getDateFin().toLocalDate());
+    public void setSejour(Sejour sejour){
+        if(sejour != null){
+            this.sejour = sejour;
+            title_lbl.setText("Titre: "+sejour.getTitre());
+            lieu_lbl.setText("Lieu: "+sejour.getLieu());
+            nombrePersone_lbl.setText("Nombre de personnes: "+sejour.getNombrePersonnes());
+            if(sejour.getImage()!=null && !sejour.getImage().isEmpty()){
+                image_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/"+sejour.getImage()))));
+            }
+            dateDebut_dp.setValue(sejour.getDateDebut().toLocalDate());
+            dateFin_dp.setValue(sejour.getDateFin().toLocalDate());
+        }
+    }
 
+    public Sejour getSejour() {
+        return sejour;
+    }
+
+    @FXML
+    public void onClick(){
+        onSejourClicked.set(this.sejour);
     }
 }

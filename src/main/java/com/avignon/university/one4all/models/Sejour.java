@@ -79,4 +79,18 @@ public class Sejour {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "Sejour{" +
+                "id=" + id +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", lieu='" + lieu + '\'' +
+                ", titre='" + titre + '\'' +
+                ", hote=" + hote +
+                ", nombrePersonnes=" + nombrePersonnes +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

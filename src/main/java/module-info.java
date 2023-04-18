@@ -9,5 +9,6 @@ module com.avignon.university.one4all {
     exports com.avignon.university.one4all;
     exports com.avignon.university.one4all.controllers;
     exports com.avignon.university.one4all.models;
+    exports com.avignon.university.one4all.multithreading;
     opens com.avignon.university.one4all.controllers to javafx.fxml;
 }

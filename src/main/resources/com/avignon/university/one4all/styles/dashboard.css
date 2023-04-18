@@ -2,6 +2,7 @@
     -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
+
 .bg-white{
     -fx-background-color: #fff;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,.3), 8, 0, 0, 0);

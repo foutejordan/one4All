@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane prefHeight="591.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.SejoursItem">
+<AnchorPane prefHeight="591.0" prefWidth="742.0" styleClass="bg" stylesheets="@styles/sejours-item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.SejoursItem">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="107.0" prefWidth="714.0" styleClass="bg-white" stylesheets="@styles/sejours-item.css">
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="107.0" prefWidth="714.0" styleClass="bg-gradient" stylesheets="@styles/sejours-item.css">
          <children>
             <HBox layoutX="45.0" layoutY="16.0" spacing="40.0">
                <children>
@@ -34,7 +33,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <ScrollPane layoutX="14.0" layoutY="147.0" prefHeight="430.0" prefWidth="714.0" styleClass="bg-white" stylesheets="@styles/sejours-item.css">
+      <ScrollPane layoutX="14.0" layoutY="147.0" prefHeight="430.0" prefWidth="714.0" styleClass="bg-gradient" stylesheets="@styles/sejours-item.css">
          <content>
             <GridPane fx:id="sejours_container" prefHeight="36.0" prefWidth="0.0">
               <columnConstraints>
