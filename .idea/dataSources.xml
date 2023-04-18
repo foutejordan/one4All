@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:one4All.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="one4All" uuid="c2e2ce80-21ac-4cc1-9309-6a2b2b28a312">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\etudiant\Documents\M1 IA\S2\Interfaces et prototype\one4All\one4All.sqlite</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
