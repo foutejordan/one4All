@@ -1,60 +1,96 @@
 package com.avignon.university.one4all.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Sejour {
-    int idHote;
-    Date date_debut;
-    Date date_fin;
-    int prix;
-    String lieux;
-    String titre;
+    private int id;
+    private Date dateDebut;
+    private Date dateFin;
+    private String lieu;
+    private String titre;
+    private int hote;
+    private int nombrePersonnes;
 
-    public int getIdHote() {
-        return idHote;
+    private String image;
+
+    public Sejour() {
     }
 
-    public Date getDate_debut() {
-        return date_debut;
+    public int getId() {
+        return id;
     }
 
-    public Date getDate_fin() {
-        return date_fin;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getPrix() {
-        return prix;
+    public Date getDateDebut() {
+        return dateDebut;
     }
 
-    public String getLieux() {
-        return lieux;
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public Date getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public String getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
     }
 
     public String getTitre() {
         return titre;
     }
 
-    public int getNbrePersonnes() {
-        return nbrePersonnes;
-    }
-
-    public String getStatut() {
-        return statut;
-    }
-
-    public Sejour(int idHote, Date date_debut, Date date_fin, int prix, String lieux, String titre, int nbrePersonnes, String statut) {
-        this.idHote = idHote;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
-        this.prix = prix;
-        this.lieux = lieux;
+    public void setTitre(String titre) {
         this.titre = titre;
-        this.nbrePersonnes = nbrePersonnes;
-        this.statut = statut;
     }
 
-    int nbrePersonnes;
-    String statut;
+    public int getHote() {
+        return hote;
+    }
 
+    public void setHote(int hote) {
+        this.hote = hote;
+    }
 
+    public int getNombrePersonnes() {
+        return nombrePersonnes;
+    }
+
+    public void setNombrePersonnes(int nombrePersonnes) {
+        this.nombrePersonnes = nombrePersonnes;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Sejour{" +
+                "id=" + id +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", lieu='" + lieu + '\'' +
+                ", titre='" + titre + '\'' +
+                ", hote=" + hote +
+                ", nombrePersonnes=" + nombrePersonnes +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

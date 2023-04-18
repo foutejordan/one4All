@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="213.0" prefWidth="450.0" styleClass="bg-gradient" stylesheets="@styles/comment-sender.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.CommentSender">
+   <children>
+      <AnchorPane layoutX="26.0" layoutY="19.0" styleClass="bg-gradient">
+         <children>
+            <ImageView fitHeight="82.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/comment.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="140.0" layoutY="26.0" prefHeight="25.0" prefWidth="298.0" text="Author">
+         <styleClass>
+            <String fx:value="author" />
+            <String fx:value="textfield" />
+         </styleClass>
+      </Label>
+      <Label layoutX="140.0" layoutY="60.0" prefHeight="25.0" prefWidth="298.0" text="Date">
+         <styleClass>
+            <String fx:value="date" />
+            <String fx:value="textfield" />
+         </styleClass>
+      </Label>
+      <TextArea layoutX="137.0" layoutY="96.0" prefHeight="99.0" prefWidth="305.0" />
+   </children>
+</AnchorPane>

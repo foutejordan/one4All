@@ -1,8 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane prefHeight="591.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.Signin">
-
+<AnchorPane prefHeight="591.0" prefWidth="742.0" styleClass="bg" stylesheets="@styles/login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.Signin">
+   <children>
+      <ImageView fitHeight="167.0" fitWidth="165.0" layoutX="289.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/signin.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="245.0" layoutY="255.0" spacing="30.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <TextField fx:id="username_textfield" prefHeight="38.0" prefWidth="253.0" promptText="Utilisateur" styleClass="textfield">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </TextField>
+                  <ImageView fitHeight="28.0" fitWidth="36.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/username.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="36.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/password.png" />
+                     </image>
+                  </ImageView>
+                  <PasswordField fx:id="password_textfield" prefHeight="38.0" prefWidth="253.0" promptText="Mot de passe" styleClass="textfield">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </PasswordField>
+                  <TextField fx:id="password_content_textfield" prefHeight="38.0" prefWidth="253.0" promptText="Mot de passe" styleClass="textfield" visible="false">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <Button layoutX="318.0" layoutY="462.0" mnemonicParsing="false" styleClass="login-btn" text="Se connecter" />
+      <AnchorPane layoutX="323.0" layoutY="403.0">
+         <children>
+            <CheckBox fx:id="show_password_checkbox" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="158.0" mnemonicParsing="false" onAction="#onShowPasswordClicked" styleClass="display-password-checkbox" textAlignment="RIGHT" textFill="#ff3f3f" />
+            <Hyperlink fx:id="show_password_btn" layoutY="1.0" onAction="#onShowPasswordClicked" text="Afficher le mot de passe" />
+         </children>
+      </AnchorPane>
+      <Hyperlink fx:id="create_account_btn" layoutX="289.0" layoutY="531.0" onAction="#onCreateAccountClicked" text="Créer un nouveau compte" />
+   </children>
 </AnchorPane>

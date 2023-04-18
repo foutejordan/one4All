@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="393.0" prefWidth="223.0" stylesheets="@styles/sejour-card.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.SejourCard">
+   <children>
+      <AnchorPane layoutX="38.0" layoutY="14.0" styleClass="bg-gradient">
+         <children>
+            <ImageView fx:id="image_iv" fitHeight="150.0" fitWidth="200.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/house1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <VBox layoutX="14.0" layoutY="167.0" spacing="10.0">
+         <children>
+            <Label fx:id="title_lbl" prefHeight="37.0" prefWidth="196.0" text="Titre">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="textfield" />
+                  <String fx:value="titre" />
+               </styleClass>
+            </Label>
+            <Label fx:id="lieu_lbl" prefHeight="37.0" prefWidth="196.0" text="Lieu">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="textfield" />
+                  <String fx:value="lieux" />
+               </styleClass>
+            </Label>
+            <Label fx:id="nombrePersone_lbl" prefHeight="37.0" prefWidth="196.0" text="Nombre de personne">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="textfield" />
+                  <String fx:value="nombre-personne" />
+               </styleClass>
+            </Label>
+            <DatePicker fx:id="dateFin_dp" prefHeight="31.0" prefWidth="196.0" promptText="Date de fin">
+               <styleClass>
+                  <String fx:value="bg-gradient" />
+                  <String fx:value="date" />
+               </styleClass>
+            </DatePicker>
+            <DatePicker fx:id="dateDebut_dp" prefHeight="31.0" prefWidth="196.0" promptText="Date de début">
+               <styleClass>
+                  <String fx:value="bg-gradient" />
+                  <String fx:value="date" />
+               </styleClass>
+            </DatePicker>
+         </children>
+      </VBox>
+   </children>
+   <styleClass>
+      <String fx:value="bg-gradient" />
+      <String fx:value="card-container" />
+   </styleClass>
+</AnchorPane>

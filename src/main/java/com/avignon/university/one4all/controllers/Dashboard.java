@@ -1,16 +1,17 @@
 package com.avignon.university.one4all.controllers;
 
 import com.avignon.university.one4all.Main;
+import com.avignon.university.one4all.models.Sejour;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import com.github.javafaker.Faker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -66,6 +67,12 @@ public class Dashboard implements Initializable {
     @FXML
     private Label menu_title;
 
+    @FXML
+    private Hyperlink signin_hyperlink;
+
+    @FXML
+    private Hyperlink signout_hyperlink;
+
     public static Stage pStage;
 
 
@@ -75,8 +82,13 @@ public class Dashboard implements Initializable {
 
     public  DashboardItem dashboardItemController = null;
     public  SejoursItem sejoursItemController = null;
+
+    public  SejourDetails sejourDetailsController = null;
     public  HistoriqueItem historiqueItemController = null;
     public  PanierItem panierItemController = null;
+
+    public  Signin signinController = null;
+    public  Signup signupController = null;
 
     protected void testJavaFaker(){
         Faker faker = new Faker();
@@ -161,8 +173,9 @@ public class Dashboard implements Initializable {
             menu_title.setText(": Dashboard");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("dashboard-item.fxml"));
+            AnchorPane anchorPane = loader.load();
             dashboardItemController = loader.getController();
-            center_anchor.getChildren().add(loader.load());
+            center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -177,8 +190,35 @@ public class Dashboard implements Initializable {
             menu_title.setText(": Séjours");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("sejours-item.fxml"));
+            AnchorPane anchorPane = loader.load();
             sejoursItemController = loader.getController();
-            center_anchor.getChildren().add(loader.load());
+            sejoursItemController.onSejourClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult != null){
+                    center_anchor.getChildren().clear();
+                    initSejourDetails(newResult);
+                }
+            });
+            center_anchor.getChildren().add(anchorPane);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initSejourDetails(Sejour sejour){
+        try {
+            menu_title.setText(": Détails");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("sejour-details.fxml"));
+            AnchorPane anchorPane = loader.load();
+            sejourDetailsController = loader.getController();
+            sejourDetailsController.setSejour(sejour);
+            sejourDetailsController.isGoToListClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult){
+                    center_anchor.getChildren().clear();
+                    initSejoursMenuItem();
+                }
+            });
+            center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -189,8 +229,9 @@ public class Dashboard implements Initializable {
             menu_title.setText(": Historique");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("historique-item.fxml"));
+            AnchorPane anchorPane = loader.load();
             historiqueItemController = loader.getController();
-            center_anchor.getChildren().add(loader.load());
+            center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -200,8 +241,47 @@ public class Dashboard implements Initializable {
             menu_title.setText(": Panier");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("panier-item.fxml"));
+            AnchorPane anchorPane = loader.load();
             panierItemController = loader.getController();
-            center_anchor.getChildren().add(loader.load());
+            center_anchor.getChildren().add(anchorPane);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initSignin(){
+        center_anchor.getChildren().clear();
+        try {
+            menu_title.setText(": Connexion");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("signin.fxml"));
+            AnchorPane anchorPane = loader.load();
+            signinController = loader.getController();
+            signinController.isCreateAccountClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult){
+                    initSignup();
+                }
+            });
+            center_anchor.getChildren().add(anchorPane);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initSignup(){
+        center_anchor.getChildren().clear();
+        try {
+            menu_title.setText(": Création compte");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("signup.fxml"));
+            AnchorPane anchorPane = loader.load();
+            signupController = loader.getController();
+            signupController.isLoginClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult){
+                    initSignin();
+                }
+            });
+            center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -218,10 +298,18 @@ public class Dashboard implements Initializable {
 
     @FXML
     public void switch_login_logout(ActionEvent event){
-        Button source = (Button) event.getSource();
+        if (event.getSource() == login_btn || event.getSource() == signin_hyperlink){
+            login_hbox.setVisible(false);
+            initSignin();
+        }else if(event.getSource() == logout_btn || event.getSource() == signout_hyperlink){
+            logout_hbox.setVisible(false);
+        }
 
-        login_hbox.setVisible(!(source == login_btn));
-        logout_hbox.setVisible(!(source == logout_btn));
+    }
+
+    @FXML
+    public void switch_signin_signup(){
+
     }
 
     @FXML

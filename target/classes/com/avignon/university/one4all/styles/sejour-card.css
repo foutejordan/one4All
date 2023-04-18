@@ -1,0 +1,58 @@
+*{
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.bg-white{
+    -fx-background-color: #fff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,.3), 8, 0, 0, 0);
+    -fx-background-radius: 8px;
+}
+
+.bg-gradient{
+    -fx-background-color: linear-gradient(to top right, #1e242e, #ae2d3c);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,.3), 8, 0, 0, 0);
+    -fx-background-radius: 8px;
+}
+
+.card-container{
+    -fx-cursor: hand;
+}
+
+.textfield{
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-border-color: #d63333;
+    -fx-border-width: 0 0 .4px 0;
+}
+
+.titre{
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.lieux, .nombre-personne{
+    -fx-font-size: 14px;
+}
+
+.date .date-picker-popup{
+    -fx-background-color: #d63333;
+}
+
+.date .date-picker-popup{
+    -fx-background-color: #d63333;
+}
+
+.date .cell{
+    -fx-background-color: linear-gradient(to top right, #1e242e, #ae2d3c);
+    -fx-text-fill: #fff;
+}
+
+.date .cell:hover{
+    -fx-background-color: #d63333;
+
+}
+
+.date .cell:focused{
+    -fx-background-color: #d63333;
+    -fx-text-fill: #000
+}
