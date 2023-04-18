@@ -11,9 +11,25 @@ public class Sejour {
     private int hote;
     private int nombrePersonnes;
 
+    private double prix;
+
     private String image;
 
+
+    private String statut;
+
     public Sejour() {
+    }
+
+    public Sejour(int hote, Date dateDebut, Date dateFin, double prix, String lieu, String titre, int nombrePersonnes, String statut){
+        this.hote = hote;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.prix = prix;
+        this.lieu = lieu;
+        this.titre = titre;
+        this.nombrePersonnes = nombrePersonnes;
+        this.statut = statut;
     }
 
     public int getId() {

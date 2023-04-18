@@ -43,7 +43,7 @@ public class Main extends Application {
 
         stage.show();
         Database.init();
-        System.out.println(SignupModel.signup("jordqn", "123", 1));
+        // System.out.println(SignupModel.signup("jordqn", "123", 1));
 
     }
 

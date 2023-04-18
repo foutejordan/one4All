@@ -294,6 +294,7 @@ public class Dashboard implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        switch_signin_signup();
     }
 
     @FXML
@@ -303,13 +304,14 @@ public class Dashboard implements Initializable {
             initSignin();
         }else if(event.getSource() == logout_btn || event.getSource() == signout_hyperlink){
             logout_hbox.setVisible(false);
+            initSignup();
         }
-
     }
 
     @FXML
     public void switch_signin_signup(){
-
+        login_hbox.setVisible(false);
+        initSignin();
     }
 
     @FXML
