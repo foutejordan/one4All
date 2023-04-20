@@ -23,13 +23,16 @@ public class SigninModel {
                 statement.setString(1, login);
                 statement.setString(2, password);
                 ResultSet rs = statement.executeQuery();
+                ArrayList<Object> users = new ArrayList<>();
                 if (rs.next()) {
-                    int idUser = rs.getInt("id");
-                    String username = rs.getString("login");
-                    String pass = rs.getString("password");
-                    int role = rs.getInt("role");
-                    user = new User(username, pass, role);
-                    result.response = user;
+                    user = new User();
+                    user.id = rs.getInt("id");
+                    user.login = rs.getString("login");
+                    user.password = rs.getString("password");
+                    user.role = rs.getInt("role");
+                    user.image = rs.getString("image");
+                    users.add(user);
+                    result.response = users;
                     result.message = "Connection réussi";
                     result.state = ResponseState.SUCCESS;
                 }else{

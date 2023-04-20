@@ -15,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import com.github.javafaker.Faker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -94,6 +96,9 @@ public class Dashboard implements Initializable {
 
     @FXML
     private Label username_lbl;
+
+    @FXML
+    private ImageView profile_iv;
 
     protected void testJavaFaker(){
         Faker faker = new Faker();
@@ -299,7 +304,7 @@ public class Dashboard implements Initializable {
                         dialogController.resultProperty().addListener((d_obs, d_oldResult, d_newResult)->{
                             if (d_newResult){
                                 clearDialog();
-                                User user = (User)newResult.response;
+                                User user = (User)newResult.response.get(0);
                                 setUserInfo(user);
                                 on_user_logged_in();
 
@@ -415,11 +420,17 @@ public class Dashboard implements Initializable {
 
     private void setUserInfo(User user){
         connectedUser = user;
-        username_lbl.setText(user.getLogin());
+        username_lbl.setText(user.login);
+        System.out.print(user.image);
+        if(user != null && user.image != null){
+            profile_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/"+user.image))));
+        }
+
     }
 
     private void clearUserInfo(){
         connectedUser = null;
-        username_lbl.setText("");
+        username_lbl.setText("User");
+        profile_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/admin.png"))));
     }
 }

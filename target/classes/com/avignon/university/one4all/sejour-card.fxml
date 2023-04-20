@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="393.0" prefWidth="223.0" stylesheets="@styles/sejour-card.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.SejourCard">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="442.0" prefWidth="223.0" stylesheets="@styles/sejour-card.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.SejourCard">
    <children>
       <AnchorPane layoutX="38.0" layoutY="14.0" styleClass="bg-gradient">
          <children>
@@ -20,7 +20,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <VBox layoutX="14.0" layoutY="167.0" spacing="10.0">
+      <VBox layoutX="14.0" layoutY="167.0" prefHeight="269.0" prefWidth="196.0" spacing="10.0">
          <children>
             <Label fx:id="title_lbl" prefHeight="37.0" prefWidth="196.0" text="Titre">
                <font>
@@ -41,6 +41,15 @@
                </styleClass>
             </Label>
             <Label fx:id="nombrePersone_lbl" prefHeight="37.0" prefWidth="196.0" text="Nombre de personne">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="textfield" />
+                  <String fx:value="nombre-personne" />
+               </styleClass>
+            </Label>
+            <Label fx:id="prix_lbl" layoutX="10.0" layoutY="104.0" prefHeight="37.0" prefWidth="196.0" text="Prix">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

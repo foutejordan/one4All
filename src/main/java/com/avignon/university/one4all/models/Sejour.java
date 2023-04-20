@@ -3,25 +3,42 @@ package com.avignon.university.one4all.models;
 import java.sql.Date;
 
 public class Sejour {
-    private int id;
-    private Date dateDebut;
-    private Date dateFin;
-    private String lieu;
-    private String titre;
-    private int hote;
-    private int nombrePersonnes;
-
-    private double prix;
-
-    private String image;
+    public int id;
+    public Date dateDebut;
+    public Date dateFin;
+    public String lieu;
+    public String titre;
+    public int hote;
+    public int nombrePersonnes;
 
 
-    private String statut;
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+
+    public int getStatut() {
+        return statut;
+    }
+
+    public void setStatut(int statut) {
+        this.statut = statut;
+    }
+
+    public double prix;
+
+    public String image;
+
+
+    public int statut;
 
     public Sejour() {
     }
 
-    public Sejour(int hote, Date dateDebut, Date dateFin, double prix, String lieu, String titre, int nombrePersonnes, String statut){
+    public Sejour(int hote, Date dateDebut, Date dateFin, double prix, String lieu, String titre, int nombrePersonnes, int statut, String image){
         this.hote = hote;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -30,6 +47,7 @@ public class Sejour {
         this.titre = titre;
         this.nombrePersonnes = nombrePersonnes;
         this.statut = statut;
+        this.image = image;
     }
 
     public int getId() {
@@ -106,6 +124,7 @@ public class Sejour {
                 ", titre='" + titre + '\'' +
                 ", hote=" + hote +
                 ", nombrePersonnes=" + nombrePersonnes +
+                ", prix=" + prix +
                 ", image='" + image + '\'' +
                 '}';
     }

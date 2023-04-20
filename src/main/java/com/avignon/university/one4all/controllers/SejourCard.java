@@ -34,6 +34,9 @@ public class SejourCard implements Initializable {
     @FXML
     private Label title_lbl;
 
+    @FXML
+    private Label prix_lbl;
+
     private Sejour sejour;
 
     private final ReadOnlyObjectWrapper<Sejour> onSejourClicked = new ReadOnlyObjectWrapper<>();
@@ -49,14 +52,15 @@ public class SejourCard implements Initializable {
     public void setSejour(Sejour sejour){
         if(sejour != null){
             this.sejour = sejour;
-            title_lbl.setText("Titre: "+sejour.getTitre());
-            lieu_lbl.setText("Lieu: "+sejour.getLieu());
-            nombrePersone_lbl.setText("Nombre de personnes: "+sejour.getNombrePersonnes());
-            if(sejour.getImage()!=null && !sejour.getImage().isEmpty()){
+            title_lbl.setText("Titre: "+sejour.titre);
+            lieu_lbl.setText("Lieu: "+sejour.lieu);
+            nombrePersone_lbl.setText("Nombre de personnes: "+sejour.nombrePersonnes);
+            if(sejour.getImage()!=null && !sejour.image.isEmpty()){
                 image_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/"+sejour.getImage()))));
             }
-            dateDebut_dp.setValue(sejour.getDateDebut().toLocalDate());
-            dateFin_dp.setValue(sejour.getDateFin().toLocalDate());
+            dateDebut_dp.setValue(sejour.dateDebut.toLocalDate());
+            dateFin_dp.setValue(sejour.dateFin.toLocalDate());
+            prix_lbl.setText("Prix: € "+sejour.prix);
         }
     }
 

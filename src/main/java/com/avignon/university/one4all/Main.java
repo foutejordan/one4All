@@ -42,14 +42,11 @@ public class Main extends Application {
         });
 
         stage.show();
-        Database.init();
-        // System.out.println(SignupModel.signup("jordqn", "123", 1));
-
     }
 
     public static void main(String[] args) {
+        Database.init(false);
         launch();
-
     }
 
 }

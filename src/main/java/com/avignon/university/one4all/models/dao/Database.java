@@ -1,5 +1,7 @@
 package com.avignon.university.one4all.models.dao;
 
+import com.avignon.university.one4all.models.Panier;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -40,8 +42,9 @@ public class Database {
     public static  void createUsersTable() {
         String query = "CREATE TABLE IF NOT EXISTS Users (" +
                 "id INTEGER NOT NULL PRIMARY KEY ," +
-                "login VARCHAR," +
-                "password VARCHAR," +
+                "login TEXT," +
+                "password TEXT," +
+                "image TEXT," +
                 "role INTEGER )";
         try (Connection connection = Database.connect("one4All.sqlite")) {
             Statement statement = connection.createStatement();
@@ -50,7 +53,25 @@ public class Database {
             System.out.println(e.getMessage());
             Logger.getAnonymousLogger().log(
                     Level.SEVERE,
-                    LocalDateTime.now() + ": Could not create this table data from database ");
+                    LocalDateTime.now() + " : "+e.getMessage());
+        }
+    }
+
+    public static void deleteAllTables(){
+        String tables[] = {"Sejour", "Users", "Comments", "Panier", "Reservations"};
+
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            for (String table_name:tables) {
+                String query = "DROP TABLE IF EXISTS "+table_name;
+                Statement statement = connection.createStatement();
+                statement.executeUpdate(query);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + " : "+e.getMessage());
         }
     }
 
@@ -59,14 +80,14 @@ public class Database {
         String query = "CREATE TABLE IF NOT EXISTS Sejour (" +
                 "id INTEGER  NOT NULL PRIMARY KEY ," +
                 "idHote INTEGER ," +
-                "date_debut DATE," +
-                "date_fin DATE ," +
-                "prix INTEGER ," +
-                "lieux VARCHAR," +
-                "titre VARCHAR," +
+                "date_debut TEXT," +
+                "date_fin TEXT ," +
+                "prix REAL ," +
+                "lieux TEXT," +
+                "titre TEXT," +
                 "nbrePersonnes INTEGER, " +
-                "statut VARCHAR," +
-                "role INTEGER," +
+                "image TEXT," +
+                "statut INTEGER," +
                 "FOREIGN KEY (idHote) REFERENCES Users (id) )";
         try (Connection connection = Database.connect("one4All.sqlite")) {
             Statement statement = connection.createStatement();
@@ -84,8 +105,8 @@ public class Database {
                 "id INTEGER  NOT NULL PRIMARY KEY ," +
                 "idUser INTEGER, " +
                 "idSejour INTEGER," +
-                "message VARCHAR(50)," +
-                "date DATE," +
+                "message TEXT," +
+                "date TEXT," +
                 "FOREIGN KEY (idUser) REFERENCES Users (id)," +
                 "FOREIGN KEY (idSejour) REFERENCES Sejour (id))";
         try (Connection connection = Database.connect("one4All.sqlite")) {
@@ -104,6 +125,7 @@ public class Database {
                 "id INTEGER  NOT NULL PRIMARY KEY ," +
                 "idSejour INTEGER," +
                 "idUser INTEGER," +
+                "statut INTEGER," +
                 "FOREIGN KEY (idUser) REFERENCES Users (id)," +
                 "FOREIGN KEY (idSejour) REFERENCES Sejour (id) )";
         try (Connection connection = Database.connect("one4All.sqlite")) {
@@ -121,12 +143,11 @@ public class Database {
         String query = "CREATE TABLE IF NOT EXISTS Reservations (" +
                 "id INTEGER  NOT NULL PRIMARY KEY ," +
                 "idSejour INTEGER," +
-                "message VARCHAR(100)," +
-                "decision VARCHAR(50)," +
-                "idCurentUser INTEGER," +
-                "idHoteUser INTEGER," +
-                "FOREIGN KEY (idCurentUser) REFERENCES Users (id)," +
-                "FOREIGN KEY (idHoteUser) REFERENCES Users (id)," +
+                "statut INTEGER," +
+                "idUser INTEGER," +
+                "idHote INTEGER," +
+                "FOREIGN KEY (idUser) REFERENCES Users (id)," +
+                "FOREIGN KEY (idHote) REFERENCES Users (id)," +
                 "FOREIGN KEY (idSejour) REFERENCES Sejour (id) )";
         try (Connection connection = Database.connect("one4All.sqlite")) {
             Statement statement = connection.createStatement();
@@ -139,13 +160,26 @@ public class Database {
         }
     }
 
-    public static void init(){
+    public static void init(Boolean reset){
         if(Database.checkDrivers()){
+            if(reset){
+                Database.deleteAllTables();
+            }
+
+
             Database.createUsersTable();
             Database.createStaysTable();
             Database.createCommentsTable();
             Database.createBasketsTable();
             Database.createReservationTable();
+
+            if(reset){
+                userModel.initUsersTable(10);
+                SejourModel.initSejourTable(50);
+                CommentModel.initCommentTable(20);
+                panierModel.initPanierTable(10);
+            }
+
         }
     }
 }

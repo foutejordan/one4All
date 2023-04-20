@@ -1,7 +1,10 @@
 package com.avignon.university.one4all.controllers;
 
 import com.avignon.university.one4all.Main;
+import com.avignon.university.one4all.models.QueryResponse;
+import com.avignon.university.one4all.models.ResponseState;
 import com.avignon.university.one4all.models.Sejour;
+import com.avignon.university.one4all.models.dao.SejourModel;
 import com.avignon.university.one4all.multithreading.DataModel;
 import com.avignon.university.one4all.multithreading.DataService;
 import com.github.javafaker.Faker;
@@ -60,30 +63,14 @@ public class SejoursItem implements Initializable {
         //loadUsingThread();
     }
 
-    protected void testJavaFaker() {
-        try {
-            Faker faker = new Faker();
+    private void loadCards(QueryResponse qr) throws IOException {
+        if(qr.state == ResponseState.SUCCESS){
             int column = 1;
             int row = 1;
-            int size = 50;
+            int size = qr.response.size();
             sejours_container.getChildren().clear();
             for (int i = 1; i <= size; i++) {
-                Sejour sejour = new Sejour();
-                Date dateDebut =  new Date(faker.date().future(12, TimeUnit.DAYS).getTime());
-                Date dateFin = new Date(faker.date().future(24, TimeUnit.DAYS).getTime());
-                String lieu = faker.address().city();
-                String titre = faker.funnyName().name();
-                int nombrePersonne = faker.number().randomDigitNotZero();
-                int idxImage  = faker.number().numberBetween(1, 5);
-
-                sejour.setLieu(lieu);
-                sejour.setTitre(titre);
-                sejour.setDateDebut(dateDebut);
-                sejour.setDateFin(dateFin);
-                sejour.setNombrePersonnes(nombrePersonne);
-                sejour.setImage("house"+idxImage+".png");
-
-
+                Sejour sejour = (Sejour) qr.response.get(i-1);
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("sejour-card.fxml"));
                 AnchorPane sejourCard = loader.load();
@@ -102,8 +89,14 @@ public class SejoursItem implements Initializable {
                 sejours_container.add(sejourCard, column++, row);
                 GridPane.setMargin(sejourCard, new Insets(3));
             }
+        }
+    }
+    protected void testJavaFaker() {
+        try {
+            QueryResponse qr = SejourModel.getAllSejours();
+            loadCards(qr);
         }catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("ERREUR: "+e.getMessage());
         }
 
     }
@@ -144,9 +137,26 @@ public class SejoursItem implements Initializable {
 
     @FXML
     public void onRechercherClicked(){
-        String multi_value = titre_lieu_nbPersonne_tf.getText();
-        LocalDate dateDebut = dateDebut_dp.getValue();
-        LocalDate dateFin = dateFin_dp.getValue();
+        try {
+            String multi_value = titre_lieu_nbPersonne_tf.getText();
+            Date dateDebut = null;
+            Date dateFin = null;
+            LocalDate d1 = dateDebut_dp.getValue();
+            LocalDate d2 = dateFin_dp.getValue();
+
+            if(d1 != null){
+                dateDebut = Date.valueOf(d1);
+            }
+
+            if(d2!=null){
+                dateFin = Date.valueOf(d2);
+            }
+
+            QueryResponse qr = SejourModel.getSejourByMultiCriteria(multi_value, dateDebut, dateFin);
+            loadCards(qr);
+        } catch (IOException e) {
+            System.out.println("ERREUR: "+e.getMessage());
+        }
     }
 
 

@@ -1,18 +1,23 @@
 package com.avignon.university.one4all.models;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Comment {
 
-    int idSejour;
+    public int id;
+    public int idSejour;
 
     public int getIdUser() {
         return idUser;
     }
 
-    int idUser;
-    String message;
-    Date date;
+    public int idUser;
+    public String message;
+    public Date date;
+
+    public Comment() {
+    }
 
     public int getIdSejour() {
         return idSejour;
