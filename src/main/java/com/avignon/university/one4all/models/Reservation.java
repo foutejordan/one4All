@@ -1,39 +1,34 @@
 package com.avignon.university.one4all.models;
 
 public class Reservation {
+    public Reservation(int idSejour, int statut, int idUser, int idHote) {
+        this.idSejour = idSejour;
+        this.statut = statut;
+        this.idUser = idUser;
+        this.idHote = idHote;
+    }
 
     int idSejour;
-
-    public Reservation(int idSejour, int idCurentUser, int idHoteUser, String message, String decision) {
-        this.idSejour = idSejour;
-        this.idCurentUser = idCurentUser;
-        this.idHoteUser = idHoteUser;
-        this.message = message;
-        this.decision = decision;
-    }
+    int statut;
+    int idUser;
 
     public int getIdSejour() {
         return idSejour;
     }
 
-    public int getIdCurentUser() {
-        return idCurentUser;
+    public int getStatut() {
+        return statut;
     }
 
-    public int getIdHoteUser() {
-        return idHoteUser;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public String getMessage() {
-        return message;
+    public int getIdHote() {
+        return idHote;
     }
 
-    public String getDecision() {
-        return decision;
-    }
+    int idHote;
 
-    int idCurentUser;
-    int idHoteUser;
-    String message;
-    String decision;
+
 }
