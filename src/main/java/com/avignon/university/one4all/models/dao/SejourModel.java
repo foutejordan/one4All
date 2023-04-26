@@ -267,7 +267,7 @@ public class SejourModel {
         System.out.println(nbSejours + " sejours created successfully");
     }
 
-    // staut: 1-> disponible, 2-> occupe
+    // staut: 1-> disponible, 2-> occupe, 3-> en cours de validation
     public static QueryResponse changeSejourStatus(int statut, int idSejour) {
 
         String query = "UPDATE Sejour SET statut = ? WHERE id = ?";
@@ -292,5 +292,66 @@ public class SejourModel {
 
         }
         return result;
+    }
+
+    // Requêtes retournant le nombre total de séjours disponibles
+    public static int totalAvailableSejour() {
+        String query = "SELECT COUNT(*) as count FROM  Sejour WHERE statut = ?";
+        int total = 0;
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            // je passe 1 car 1-> disponible dans la table
+            statement.setInt(1, 1);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not load data from database ");
+        }
+        return total;
+    }
+
+    //Requêtes retournant le nombre total de séjours d'un hote en cours de validation
+    // en cours de validation=> statut = 3; et idHote
+
+    public static int totalSejourEnCours(int idHote) {
+        String query = "SELECT COUNT(*) as count FROM  Sejour WHERE statut = ? AND idHote = ?";
+        int total = 0;
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            // je passe 1 car 1-> disponible dans la table
+            statement.setInt(1, 3);
+            statement.setInt(2, idHote);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not load data from database ");
+        }
+        return total;
+    }
+
+    // nombre total de sejour
+    public static int totalSejours() {
+        String query = "SELECT COUNT(*) as count FROM  Sejour";
+        int total = 0;
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not load data from database ");
+        }
+        return total;
     }
 }
