@@ -69,7 +69,10 @@ public class Main extends Application {
         //System.out.println(SejourModel.totalAvailableSejour());
 
         //total sejour en cours de validation ( pour hote )
-        System.out.println(SejourModel.totalSejourEnCours(5));
+       // System.out.println(SejourModel.totalSejourEnCours(5));
+
+        //Total sejour d'un hote
+        System.out.println(SejourModel.totalSejoursByHote(8));
 
 
     }
