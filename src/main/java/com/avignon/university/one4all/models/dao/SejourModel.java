@@ -266,4 +266,31 @@ public class SejourModel {
         }
         System.out.println(nbSejours + " sejours created successfully");
     }
+
+    // staut: 1-> disponible, 2-> occupe
+    public static QueryResponse changeSejourStatus(int statut, int idSejour) {
+
+        String query = "UPDATE Sejour SET statut = ? WHERE id = ?";
+        QueryResponse result = new QueryResponse();
+        // Création de l'objet PreparedStatement pour exécuter la requête SQL
+        try(Connection connection = Database.connect("one4All.sqlite")) {
+            PreparedStatement rs = connection.prepareStatement(query);
+            // Définition des paramètres de la requête SQL
+            rs.setInt(1, statut);
+            rs.setInt(2, idSejour);
+            // Exécution de la requête SQL pour mettre à jour le champ "status" pour la réservation avec l'id spécifié
+            int rowsUpdated = rs.executeUpdate();
+            // Vérification du nombre de lignes mises à jour
+            if (rowsUpdated > 0) {
+                result.message = "Le champ 'statut' pour le sejour avec l'id " + idSejour + " a été mis à jour.";
+                System.out.println("Le champ 'status' pour la sejour avec l'id " + idSejour + " a été mis à jour.");
+
+            } else {
+                System.out.println("Aucun sejour trouvée avec l'id " + idSejour + ".");
+            }
+        } catch (SQLException e) {
+
+        }
+        return result;
+    }
 }

@@ -73,7 +73,55 @@ public class ReservationModel {
         return reservations;
     }
 
+    // refuser ou valider une reservation par l'hote, prend une chaine de caractere decision: "Refuse" ou "Valide"
+    // cela prend l'id de la reservation a valider et un entier decison: 1-> refus, 2-> accepte
+    public QueryResponse makeReservationDecision(int decision, int reservationID, int idSejour) {
 
+        String query = "UPDATE reservations SET statut = ? WHERE id = ?";
+        QueryResponse result = new QueryResponse();
+        // Création de l'objet PreparedStatement pour exécuter la requête SQL
+        try(Connection connection = Database.connect("one4All.sqlite")) {
+            PreparedStatement rs = connection.prepareStatement(query);
+            // Définition des paramètres de la requête SQL
+            rs.setInt(1, decision);
+            rs.setInt(2, reservationID);
+            // Exécution de la requête SQL pour mettre à jour le champ "status" pour la réservation avec l'id spécifié
+            int rowsUpdated = rs.executeUpdate();
+            // Vérification du nombre de lignes mises à jour
+            if (rowsUpdated > 0) {
+                result.message = "Le champ 'statut' pour la réservation avec l'id " + reservationID + " a été mis à jour.";
+                System.out.println("Le champ 'status' pour la réservation avec l'id " + reservationID + " a été mis à jour.");
+
+                // il faut changer le statut du sejour
+                SejourModel.changeSejourStatus(decision, idSejour);
+            } else {
+                System.out.println("Aucune réservation trouvée avec l'id " + reservationID + ".");
+            }
+        } catch (SQLException e) {
+
+        }
+        return result;
+    }
+
+    // Requêtes retournant le nombre total de réservation recu par l'Hote
+
+    public int totalOfreservations(int hoteID) {
+        String query = "SELECT COUNT(*) as count FROM  Reservations WHERE idHote = ?";
+        int total = 0;
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, hoteID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+               total = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not load data from database ");
+        }
+        return total;
+    }
 
 
 
