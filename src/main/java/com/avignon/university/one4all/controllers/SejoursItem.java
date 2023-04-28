@@ -44,7 +44,11 @@ public class SejoursItem implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initSejoursContainer();
+        try {
+            initSejoursContainer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -67,23 +71,99 @@ public class SejoursItem implements Initializable {
     private FlowPane sejoursContainer;
 
     // Nombre de séjours à afficher par page
-    private static final int PAGE_SIZE = 100;
+    private static final int PAGE_SIZE = 60;
 
     // Numéro de la page actuellement affichée
     private int currentPage = 0;
 
     // Liste complète des séjours
-    private List<Sejour> allSejours;
+    private ArrayList<Sejour> allSejours;
 
     // Liste des cartes de séjour actuellement affichées
-    private List<SejourCard> displayedSejourCards = new ArrayList<>();
+    private List<Sejour> displayedSejourCards = new ArrayList<>();
 
-    public void initSejoursContainer(){
-        testJavaFaker();
+    public void initSejoursContainer() throws IOException {
+        //testJavaFaker();
         //loadUsingThread();
+
+        allSejours = SejourModel.getAllSejours();
+        int numPages = (int) Math.ceil(allSejours.size() / (double) PAGE_SIZE);
+        System.out.println(numPages);
+        try {
+            // Charger les cartes de séjour pour la première page
+            loadSejourCards(currentPage);
+        } catch (IOException e) {
+            System.out.println("ERREUR: " + e.getMessage());
+        }
+
+        // Ajouter un écouteur pour le défilement de la grille de séjours
+        sejours_container.setOnScroll(event -> {
+            double deltaY = event.getDeltaY();
+            double vValue = scrollPane.getVvalue();
+
+            // Vérifier si l'utilisateur a défilé vers le bas
+            if (deltaY > 0) {
+                // Vérifier si nous sommes à la fin de la grille de séjours
+                if (vValue == 1) {
+                    System.out.println("Nous sommes en bas");
+                    // Charger la page suivante si elle existe
+                    if (currentPage < numPages - 1) {
+                        currentPage++;
+                        try {
+                            loadSejourCards(currentPage);
+                        } catch (IOException e) {
+                            System.out.println("ERREUR: " + e.getMessage());
+                        }
+                    }
+                }
+            }
+        });
     }
 
-    private void loadCards(QueryResponse qr) throws IOException {
+    private void loadSejourCards(int page) throws IOException {
+        // Vérifier si la page demandée est valide
+        int numPages = (int) Math.ceil(allSejours.size() / (double) PAGE_SIZE);
+        if (page < 0 || page >= numPages) {
+            return;
+        }
+
+        // Déterminons l'indice de départ et le nombre d'éléments à afficher pour la page demandée
+        int startIndex = page * PAGE_SIZE;
+        int endIndex = Math.min(startIndex + PAGE_SIZE, allSejours.size());
+
+        // Chargeons les cartes de séjour pour la page demandée
+        List<Sejour> pageSejours = allSejours.subList(startIndex, endIndex);
+
+        displayedSejourCards.addAll(pageSejours);
+
+        System.out.println(displayedSejourCards.size());
+        int column = 0;
+        int row = 0;
+        for (Sejour sejour : displayedSejourCards) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("sejour-card.fxml"));
+            AnchorPane sejourCard = loader.load();
+            SejourCard sejourCardController = loader.getController();
+
+            sejourCardController.onSejourClickedProperty().addListener((obs, oldResult, newResult) -> {
+                if (newResult != null) {
+                    onSejourClicked.set(newResult);
+                }
+            });
+            sejourCardController.setSejour(sejour);
+
+            sejours_container.add(sejourCard, column, row);
+            GridPane.setMargin(sejourCard, new Insets(3));
+
+            // Passer à la colonne suivante ou à la première colonne de la ligne suivante
+            column++;
+            if (column == 4) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+    /*private void loadCards(QueryResponse qr) throws IOException {
         if(qr.state == ResponseState.SUCCESS){
             int column = 1;
             int row = 1;
@@ -110,8 +190,8 @@ public class SejoursItem implements Initializable {
                 GridPane.setMargin(sejourCard, new Insets(3));
             }
         }
-    }
-    protected void testJavaFaker() {
+    }*/
+    /*protected void testJavaFaker() {
         try {
             QueryResponse qr = SejourModel.getAllSejours();
             loadCards(qr);
@@ -119,7 +199,7 @@ public class SejoursItem implements Initializable {
             System.out.println("ERREUR: "+e.getMessage());
         }
 
-    }
+    }*/
 
 
     private void loadUsingThread(){
@@ -155,7 +235,7 @@ public class SejoursItem implements Initializable {
 
     }
 
-    @FXML
+  /*  @FXML
     public void onRechercherClicked(){
         try {
             String multi_value = titre_lieu_nbPersonne_tf.getText();
@@ -177,7 +257,7 @@ public class SejoursItem implements Initializable {
         } catch (IOException e) {
             System.out.println("ERREUR: "+e.getMessage());
         }
-    }
+    }*/
 
 
 }

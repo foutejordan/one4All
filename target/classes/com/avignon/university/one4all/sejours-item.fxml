@@ -22,7 +22,7 @@
                   <DatePicker fx:id="dateFin_dp" prefHeight="31.0" prefWidth="178.0" promptText="Date de fin" styleClass="search-text" />
                </children>
             </HBox>
-            <Button fx:id="rechercher_btn" layoutX="282.0" layoutY="61.0" mnemonicParsing="false" onAction="#onRechercherClicked" prefHeight="33.0" prefWidth="152.0" styleClass="search-btn" text="Rechercher">
+            <Button fx:id="rechercher_btn" layoutX="282.0" layoutY="61.0" mnemonicParsing="false"  prefHeight="33.0" prefWidth="152.0" styleClass="search-btn" text="Rechercher">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,7 +33,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <ScrollPane layoutX="14.0" layoutY="147.0" prefHeight="430.0" prefWidth="714.0" styleClass="bg-gradient" stylesheets="@styles/sejours-item.css">
+      <ScrollPane fx:id="scrollPane" layoutX="14.0" layoutY="147.0" prefHeight="430.0" prefWidth="714.0" styleClass="bg-gradient" stylesheets="@styles/sejours-item.css">
          <content>
             <GridPane fx:id="sejours_container" prefHeight="36.0" prefWidth="0.0">
               <columnConstraints>

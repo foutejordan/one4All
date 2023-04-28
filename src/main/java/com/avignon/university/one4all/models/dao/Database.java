@@ -175,7 +175,7 @@ public class Database {
 
             if(reset){
                 userModel.initUsersTable(10);
-                SejourModel.initSejourTable(50);
+                SejourModel.initSejourTable(1000);
                 CommentModel.initCommentTable(20);
                 panierModel.initPanierTable(10);
             }

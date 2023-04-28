@@ -56,10 +56,10 @@ public class SejourModel {
         return result;
     }
 
-    public static QueryResponse getAllSejours(){
+    public static ArrayList<Sejour> getAllSejours(){
         String query = "SELECT * FROM Sejour";
         QueryResponse result = new QueryResponse();
-        ArrayList<Object> sejours = new ArrayList<>();
+        ArrayList<Sejour> sejours = new ArrayList<>();
 
         try (Connection connection = Database.connect("one4All.sqlite")) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -70,14 +70,14 @@ public class SejourModel {
             }
             result.state = ResponseState.SUCCESS;
             result.message = "Tous les séjours obtenus avec succès";
-            result.response = sejours;
+            //result.response = sejours;
         }catch (SQLException e) {
             Logger.getAnonymousLogger().log(
                     Level.SEVERE,
                     LocalDateTime.now() + " : "+e.getMessage());
 
         }
-        return result;
+        return sejours;
     }
 
     private static Sejour getValues(ResultSet rs) throws SQLException {
