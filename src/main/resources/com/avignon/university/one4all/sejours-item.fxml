@@ -15,14 +15,14 @@
    <children>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="107.0" prefWidth="714.0" styleClass="bg-gradient" stylesheets="@styles/sejours-item.css">
          <children>
-            <HBox layoutX="45.0" lay   outY="16.0" spacing="40.0">
+            <HBox layoutX="45.0" layoutY="16.0" spacing="40.0">
                <children>
-                  <TextField   fx:id="titre_lieu_nbPersonne_tf" prefHeight="31.0" prefWidth="189.0" promptText="Titre, lieu, nb personnes" styleClass="search-text" />
+                  <TextField  fx:id="titre_lieu_nbPersonne_tf" prefHeight="31.0" prefWidth="189.0" promptText="Titre, lieu, nb personnes" styleClass="search-text" />
                   <DatePicker fx:id="dateDebut_dp" prefHeight="31.0" prefWidth="178.0" promptText="Date de début" styleClass="search-text" />
                   <DatePicker fx:id="dateFin_dp" prefHeight="31.0" prefWidth="178.0" promptText="Date de fin" styleClass="search-text" />
                </children>
             </HBox>
-            <Button fx:id="rechercher_btn" layoutX="282.0" layoutY="61.0" mnemonicParsing="false"  prefHeight="33.0" prefWidth="152.0" styleClass="search-btn" text="Rechercher">
+            <Button fx:id="rechercher_btn" layoutX="282.0" layoutY="61.0" mnemonicParsing="false" onAction="#onRechercherClicked" prefHeight="33.0" prefWidth="152.0" styleClass="search-btn" text="Rechercher">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>

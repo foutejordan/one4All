@@ -144,11 +144,11 @@ public class SejourModel {
         return result;
     }
 
-    public static QueryResponse getSejourByMultiCriteria(String x, Date dateDebut, Date dateFin){
+    public static ArrayList<Sejour> getSejourByMultiCriteria(String x, Date dateDebut, Date dateFin){
         // String query = "SELECT * FROM Sejour WHERE UPPER(titre) LIKE ? OR UPPER(lieux) LIKE ? OR nbrePersonnes = ? OR prix = ? OR date_debut = ? OR date_fin = ? COLLATE NOCASE";
         String query = "SELECT * FROM Sejour ";
         QueryResponse result = new QueryResponse();
-        ArrayList<Object> sejours = new ArrayList<>();
+        ArrayList<Sejour> sejours = new ArrayList<>();
         try (Connection connection = Database.connect("one4All.sqlite")) {
             String titrePart = "";
             String lieuPart = "";
@@ -221,15 +221,49 @@ public class SejourModel {
             }
             result.state = ResponseState.SUCCESS;
             result.message = "Liste des séjours obtenus avec succès";
-            result.response = sejours;
+            //result.response = sejours;
         }catch (SQLException e) {
             Logger.getAnonymousLogger().log(
                     Level.SEVERE,
                     LocalDateTime.now() + " : "+e.getMessage());
 
         }
-        return result;
+        return sejours;
     }
+
+    public static ArrayList<Sejour> search(String searchText) throws SQLException {
+        ArrayList<Sejour> searchResults = new ArrayList<Sejour>();
+
+        // Connexion à la base de données
+        try (Connection connection = Database.connect("one4All.sqlite")) {
+            // Requête SQL pour rechercher les séjours
+            String sql = "SELECT * FROM Sejour WHERE UPPER(titre) LIKE ? OR UPPER(lieux) LIKE ? OR UPPER(prix) LIKE ? OR UPPER(nbrePersonnes) LIKE ?";
+
+            // Préparation de la requête
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, "%" + searchText.toUpperCase() + "%");
+            stmt.setString(2, "%" + searchText.toUpperCase() + "%");
+            stmt.setString(3, "%" + searchText.toUpperCase() + "%");
+            stmt.setString(4, "%" + searchText + "%");
+
+            // Exécution de la requête
+            ResultSet rs = stmt.executeQuery();
+
+            // Parcourir les résultats de la requête et les ajouter à la liste des résultats de recherche
+            while (rs.next()) {
+                Sejour sejour = getValues(rs);
+                searchResults.add(sejour);
+            }
+        }catch (SQLException e) {
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + " : "+e.getMessage());
+
+        }
+        return searchResults;
+    }
+
+
 
     private static int addToNumber(int number) {
         // Récupération du nombre de chiffres du nombre donné

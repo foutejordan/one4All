@@ -10,6 +10,7 @@ import com.avignon.university.one4all.multithreading.DataService;
 import com.github.javafaker.Faker;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -26,6 +28,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -235,29 +238,41 @@ public class SejoursItem implements Initializable {
 
     }
 
-  /*  @FXML
-    public void onRechercherClicked(){
-        try {
-            String multi_value = titre_lieu_nbPersonne_tf.getText();
-            Date dateDebut = null;
-            Date dateFin = null;
-            LocalDate d1 = dateDebut_dp.getValue();
-            LocalDate d2 = dateFin_dp.getValue();
+    @FXML
+    public void onRechercherClicked() throws SQLException, IOException {
+        String multi_value = titre_lieu_nbPersonne_tf.getText();
+        System.out.println(multi_value);
+        Date dateDebut = null;
+        Date dateFin = null;
+        LocalDate d1 = dateDebut_dp.getValue();
+        LocalDate d2 = dateFin_dp.getValue();
 
-            if(d1 != null){
-                dateDebut = Date.valueOf(d1);
-            }
-
-            if(d2!=null){
-                dateFin = Date.valueOf(d2);
-            }
-
-            QueryResponse qr = SejourModel.getSejourByMultiCriteria(multi_value, dateDebut, dateFin);
-            loadCards(qr);
-        } catch (IOException e) {
-            System.out.println("ERREUR: "+e.getMessage());
+        if(d1 != null){
+            dateDebut = Date.valueOf(d1);
         }
-    }*/
 
+        if(d2!=null){
+            dateFin = Date.valueOf(d2);
+        }
+
+        allSejours = SejourModel.getSejourByMultiCriteria(multi_value, dateDebut, dateFin);
+        loadSejourCards(0);
+        initSejoursContainer();
+        //loadCards(qr);
+    }
+
+    public void handleTextFieldChanged(KeyEvent event) throws IOException, SQLException {
+        String newValue = titre_lieu_nbPersonne_tf.getText();
+
+        allSejours = SejourModel.search(newValue);
+        loadSejourCards(0);
+        //initSejoursContainer();
+    }
+
+    public void handleDatePickerChanged(ActionEvent event) {
+        LocalDate newValue = dateDebut_dp.getValue();
+        LocalDate newValue2 = dateFin_dp.getValue();
+        // Effectuez votre traitement ici
+    }
 
 }
