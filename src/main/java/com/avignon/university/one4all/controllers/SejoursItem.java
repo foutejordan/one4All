@@ -255,16 +255,16 @@ public class SejoursItem implements Initializable {
             dateFin = Date.valueOf(d2);
         }
 
-        allSejours = SejourModel.getSejourByMultiCriteria(multi_value, dateDebut, dateFin);
+        displayedSejourCards = SejourModel.getSejourByMultiCriteria(multi_value,dateDebut,dateFin);
         loadSejourCards(0);
-        initSejoursContainer();
+        //initSejoursContainer();
         //loadCards(qr);
     }
 
     public void handleTextFieldChanged(KeyEvent event) throws IOException, SQLException {
         String newValue = titre_lieu_nbPersonne_tf.getText();
 
-        allSejours = SejourModel.search(newValue);
+        displayedSejourCards = SejourModel.search(newValue);
         loadSejourCards(0);
         //initSejoursContainer();
     }
