@@ -52,7 +52,7 @@ public class panierModel {
     }
 
     public static QueryResponse deletePanier(int id){
-        String query = "DELETE FROM Users WHERE id = ?";
+        String query = "DELETE FROM Panier WHERE id = ?";
         QueryResponse result = new QueryResponse();
         try (Connection connection = Database.connect("one4All.sqlite")) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -79,7 +79,7 @@ public class panierModel {
 
 
     public QueryResponse getAllPanierByUserId(int userID) {
-        String query = "SELECT * FROM  Basket WHERE idUser = ? AND statut = 1";
+        String query = "SELECT * FROM  Panier WHERE idUser = ? AND statut = 1";
         ArrayList<Object> sejours = new ArrayList<>();
         QueryResponse result = new QueryResponse();
         try (Connection connection = Database.connect("one4All.sqlite")) {
@@ -108,7 +108,7 @@ public class panierModel {
     }
 
     public static int removeSejour(int id) {
-        int result = CRUDHelper.delete("Basket", id);
+        int result = CRUDHelper.delete("Panier", id);
         return result;
     }
 

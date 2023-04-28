@@ -78,7 +78,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Database.init(false);
+        Database.init(true);
         launch();
     }
 

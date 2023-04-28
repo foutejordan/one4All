@@ -16,8 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -43,6 +45,7 @@ public class SejoursItem implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initSejoursContainer();
+
     }
 
     @FXML
@@ -57,6 +60,23 @@ public class SejoursItem implements Initializable {
     @FXML
     private TextField titre_lieu_nbPersonne_tf;
 
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private FlowPane sejoursContainer;
+
+    // Nombre de séjours à afficher par page
+    private static final int PAGE_SIZE = 100;
+
+    // Numéro de la page actuellement affichée
+    private int currentPage = 0;
+
+    // Liste complète des séjours
+    private List<Sejour> allSejours;
+
+    // Liste des cartes de séjour actuellement affichées
+    private List<SejourCard> displayedSejourCards = new ArrayList<>();
 
     public void initSejoursContainer(){
         testJavaFaker();
