@@ -84,6 +84,7 @@ public class SejoursItem implements Initializable {
 
     // Liste des cartes de séjour actuellement affichées
     private List<Sejour> displayedSejourCards = new ArrayList<>();
+    private static final int SCROLL_THRESHOLD = 200;
 
     public void initSejoursContainer() throws IOException {
         //testJavaFaker();
@@ -104,6 +105,7 @@ public class SejoursItem implements Initializable {
             double deltaY = event.getDeltaY();
             double vValue = scrollPane.getVvalue();
 
+
             // Vérifier si l'utilisateur a défilé vers le bas
             if (deltaY > 0) {
                 // Vérifier si nous sommes à la fin de la grille de séjours
@@ -119,8 +121,24 @@ public class SejoursItem implements Initializable {
                         }
                     }
                 }
+            }else if (deltaY < 0) {
+                // Vérifier si nous sommes au début de la grille de séjours
+                if (vValue == 0){
+                    // Charger les cartes de séjour pour la page précédente (si elle existe)
+                    if (currentPage > 0) {
+                        currentPage--;
+                        try {
+                            loadSejourCards(currentPage);
+
+                            //scrollPane.setVvalue(0);
+                        } catch (IOException e) {
+                            System.out.println("ERREUR: " + e.getMessage());
+                        }
+                    }
+                }
             }
         });
+
     }
 
     private void loadSejourCards(int page) throws IOException {
@@ -135,9 +153,12 @@ public class SejoursItem implements Initializable {
         int endIndex = Math.min(startIndex + PAGE_SIZE, allSejours.size());
 
         // Chargeons les cartes de séjour pour la page demandée
-        List<Sejour> pageSejours = allSejours.subList(startIndex, endIndex);
+        displayedSejourCards = allSejours.subList(startIndex, endIndex);
 
-        displayedSejourCards.addAll(pageSejours);
+        //displayedSejourCards.addAll(pageSejours);
+
+        // Effacer le contenu précédent de la grille de séjours
+        sejours_container.getChildren().clear();
 
         System.out.println(displayedSejourCards.size());
         int column = 0;
@@ -255,7 +276,8 @@ public class SejoursItem implements Initializable {
             dateFin = Date.valueOf(d2);
         }
 
-        displayedSejourCards = SejourModel.getSejourByMultiCriteria(multi_value,dateDebut,dateFin);
+        allSejours = SejourModel.getSejourByMultiCriteria(multi_value,dateDebut,dateFin);
+        System.out.println(allSejours.size());
         loadSejourCards(0);
         //initSejoursContainer();
         //loadCards(qr);
@@ -264,7 +286,7 @@ public class SejoursItem implements Initializable {
     public void handleTextFieldChanged(KeyEvent event) throws IOException, SQLException {
         String newValue = titre_lieu_nbPersonne_tf.getText();
 
-        displayedSejourCards = SejourModel.search(newValue);
+        allSejours = SejourModel.search(newValue);
         loadSejourCards(0);
         //initSejoursContainer();
     }

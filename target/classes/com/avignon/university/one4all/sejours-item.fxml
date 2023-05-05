@@ -17,7 +17,7 @@
          <children>
             <HBox layoutX="45.0" layoutY="16.0" spacing="40.0">
                <children>
-                  <TextField  fx:id="titre_lieu_nbPersonne_tf" prefHeight="31.0" prefWidth="189.0" promptText="Titre, lieu, nb personnes" styleClass="search-text" />
+                  <TextField onKeyReleased="#handleTextFieldChanged" fx:id="titre_lieu_nbPersonne_tf" prefHeight="31.0" prefWidth="189.0" promptText="Titre, lieu, nb personnes" styleClass="search-text" />
                   <DatePicker fx:id="dateDebut_dp" prefHeight="31.0" prefWidth="178.0" promptText="Date de début" styleClass="search-text" />
                   <DatePicker fx:id="dateFin_dp" prefHeight="31.0" prefWidth="178.0" promptText="Date de fin" styleClass="search-text" />
                </children>
