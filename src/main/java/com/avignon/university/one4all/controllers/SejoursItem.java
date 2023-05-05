@@ -284,10 +284,7 @@ public class SejoursItem implements Initializable {
     }
 
     public void handleTextFieldChanged(KeyEvent event) throws IOException, SQLException {
-        String newValue = titre_lieu_nbPersonne_tf.getText();
-
-        allSejours = SejourModel.search(newValue);
-        loadSejourCards(0);
+        onRechercherClicked();
         //initSejoursContainer();
     }
 
