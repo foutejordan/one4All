@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -58,18 +57,33 @@
                   <String fx:value="nombre-personne" />
                </styleClass>
             </Label>
-            <DatePicker fx:id="dateFin_dp" prefHeight="31.0" prefWidth="196.0" promptText="Date de fin">
+            <Label fx:id="dateDebut_lbl" layoutX="10.0" layoutY="151.0" prefHeight="37.0" prefWidth="196.0" text="Date de début">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
                <styleClass>
-                  <String fx:value="bg-gradient" />
-                  <String fx:value="date" />
+                  <String fx:value="textfield" />
+                  <String fx:value="nombre-personne" />
                </styleClass>
-            </DatePicker>
-            <DatePicker fx:id="dateDebut_dp" prefHeight="31.0" prefWidth="196.0" promptText="Date de début">
+            </Label>
+            <Label fx:id="dateFin_lbl" layoutX="10.0" layoutY="198.0" prefHeight="37.0" prefWidth="196.0" text="Date de fin">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
                <styleClass>
-                  <String fx:value="bg-gradient" />
-                  <String fx:value="date" />
+                  <String fx:value="textfield" />
+                  <String fx:value="nombre-personne" />
                </styleClass>
-            </DatePicker>
+            </Label>
+            <Label fx:id="hote_lbl" layoutX="10.0" layoutY="56.0" prefHeight="37.0" prefWidth="196.0" text="Hote">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="textfield" />
+                  <String fx:value="lieux" />
+               </styleClass>
+            </Label>
          </children>
       </VBox>
    </children>

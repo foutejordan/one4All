@@ -8,11 +8,15 @@ public class Comment {
     public int id;
     public int idSejour;
 
+    public Sejour sejour;
+
     public int getIdUser() {
         return idUser;
     }
 
     public int idUser;
+    public User user;
+
     public String message;
     public Date date;
 
@@ -38,5 +42,16 @@ public class Comment {
         return date;
     }
 
-
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", idSejour=" + idSejour +
+                ", sejour=" + sejour +
+                ", idUser=" + idUser +
+                ", user=" + user +
+                ", message='" + message + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

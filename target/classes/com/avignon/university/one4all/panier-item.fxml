@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
-
 <AnchorPane prefHeight="591.0" prefWidth="742.0" styleClass="bg" stylesheets="@styles/panier-item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.PanierItem">
    <children>
-      <Button layoutX="576.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="152.0" styleClass="valider-panier-btn" text="Valider Panier">
+      <Button fx:id="validate_btn" layoutX="576.0" layoutY="14.0" mnemonicParsing="false" onAction="#validatePanier" prefHeight="33.0" prefWidth="152.0" styleClass="valider-panier-btn" text="Valider Panier">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>

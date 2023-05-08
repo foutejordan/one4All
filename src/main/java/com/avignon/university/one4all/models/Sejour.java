@@ -1,6 +1,8 @@
 package com.avignon.university.one4all.models;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sejour {
     public int id;
@@ -8,9 +10,11 @@ public class Sejour {
     public Date dateFin;
     public String lieu;
     public String titre;
-    public int hote;
+    public int idHote;
+    public User hote;
     public int nombrePersonnes;
 
+    public List<Comment> comments = new ArrayList<>();
 
     public double getPrix() {
         return prix;
@@ -38,8 +42,8 @@ public class Sejour {
     public Sejour() {
     }
 
-    public Sejour(int hote, Date dateDebut, Date dateFin, double prix, String lieu, String titre, int nombrePersonnes, int statut, String image){
-        this.hote = hote;
+    public Sejour(int idHote, Date dateDebut, Date dateFin, double prix, String lieu, String titre, int nombrePersonnes, int statut, String image){
+        this.idHote = idHote;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.prix = prix;
@@ -90,12 +94,12 @@ public class Sejour {
         this.titre = titre;
     }
 
-    public int getHote() {
-        return hote;
+    public int getIdHote() {
+        return idHote;
     }
 
-    public void setHote(int hote) {
-        this.hote = hote;
+    public void setIdHote(int idHote) {
+        this.idHote = idHote;
     }
 
     public int getNombrePersonnes() {
@@ -122,10 +126,39 @@ public class Sejour {
                 ", dateFin=" + dateFin +
                 ", lieu='" + lieu + '\'' +
                 ", titre='" + titre + '\'' +
+                ", idHote=" + idHote +
                 ", hote=" + hote +
                 ", nombrePersonnes=" + nombrePersonnes +
+                ", comments=" + comments +
                 ", prix=" + prix +
                 ", image='" + image + '\'' +
+                ", statut=" + statut +
                 '}';
     }
+
+    public User getHote() {
+        return hote;
+    }
+
+    public void setHote(User hote) {
+        this.hote = hote;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+
+    public boolean isReserve(){
+        return statut == SejourStatut.RESERVE.getValue();
+    }
+
+    public boolean isEnCoursValidation(){
+        return statut == SejourStatut.EN_COURS_VALIDATION.getValue();
+    }
+
 }

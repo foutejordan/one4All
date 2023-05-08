@@ -68,3 +68,27 @@
 .remove-btn:hover{
     -fx-background-color: linear-gradient(to bottom right, #3862c2, #4284d0);
 }
+
+.validate-btn{
+    -fx-background-color: linear-gradient(to bottom right, #118048, #0a6539);
+    -fx-background-raduis: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.validate-btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #2ba15c, #19c771);
+}
+
+.refuse-btn{
+    -fx-background-color: linear-gradient(to bottom right, #b44333, #701515);
+    -fx-background-raduis: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.refuse-btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #b9685c, #6e2e2e);
+}

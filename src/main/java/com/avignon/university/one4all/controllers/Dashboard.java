@@ -1,9 +1,7 @@
 package com.avignon.university.one4all.controllers;
 
 import com.avignon.university.one4all.Main;
-import com.avignon.university.one4all.models.ResponseState;
-import com.avignon.university.one4all.models.Sejour;
-import com.avignon.university.one4all.models.User;
+import com.avignon.university.one4all.models.*;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
@@ -87,6 +85,8 @@ public class Dashboard implements Initializable {
 
     public  SejourDetails sejourDetailsController = null;
     public  HistoriqueItem historiqueItemController = null;
+
+    public  ValidationItem validationItemItemController = null;
     public  PanierItem panierItemController = null;
 
     public  Signin signinController = null;
@@ -99,6 +99,9 @@ public class Dashboard implements Initializable {
 
     @FXML
     private ImageView profile_iv;
+
+    @FXML
+    private Label role_lbl;
 
     protected void testJavaFaker(){
         Faker faker = new Faker();
@@ -124,13 +127,16 @@ public class Dashboard implements Initializable {
     }
 
     double x, y = 0;
+
+    @FXML
+    private Button validation_btn;
     @FXML
     public void close(){
         if(dialogStage == null || dialogController == null){
             initDialog();
         }
         if(!dialogStage.isShowing()){
-            dialogController.setDialogToShow("fermeture");
+            dialogController.setDialogToShow(DialogType.FERMETURE);
             dialogController.resultProperty().addListener((obs, oldResult, newResult)->{
                 if (newResult){
                     Stage stage = (Stage) top_anchor.getScene().getWindow();
@@ -193,14 +199,21 @@ public class Dashboard implements Initializable {
             loader.setLocation(Main.class.getResource("dashboard-item.fxml"));
             AnchorPane anchorPane = loader.load();
             dashboardItemController = loader.getController();
+            dashboardItemController.setConnectedUser(connectedUser);
             center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String getStyleOnClick(Button source, Button btn){
-        return source == btn ?"-fx-background-color:#ae2d3c;":"-fx-background-color:transparent;";
+    public void getStyleOnClick(Button source, Button btn){
+        if(source == btn){
+            if(!btn.getStyleClass().contains("menu-btn-selected")){
+                btn.getStyleClass().add("menu-btn-selected");
+            }
+        }else{
+            btn.getStyleClass().remove("menu-btn-selected");
+        }
     }
 
     public void initSejoursMenuItem(){
@@ -210,9 +223,11 @@ public class Dashboard implements Initializable {
             loader.setLocation(Main.class.getResource("sejours-item.fxml"));
             AnchorPane anchorPane = loader.load();
             sejoursItemController = loader.getController();
+            sejoursItemController.setConnectedUser(connectedUser);
             sejoursItemController.onSejourClickedProperty().addListener((obs, oldResult, newResult)->{
                 if (newResult != null){
                     center_anchor.getChildren().clear();
+                    setStyleOnClick(sejours_btn);
                     initSejourDetails(newResult);
                 }
             });
@@ -229,6 +244,7 @@ public class Dashboard implements Initializable {
             loader.setLocation(Main.class.getResource("sejour-details.fxml"));
             AnchorPane anchorPane = loader.load();
             sejourDetailsController = loader.getController();
+            sejourDetailsController.setConnectedUser(connectedUser);
             sejourDetailsController.setSejour(sejour);
             sejourDetailsController.isGoToListClickedProperty().addListener((obs, oldResult, newResult)->{
                 if (newResult){
@@ -249,6 +265,35 @@ public class Dashboard implements Initializable {
             loader.setLocation(Main.class.getResource("historique-item.fxml"));
             AnchorPane anchorPane = loader.load();
             historiqueItemController = loader.getController();
+            historiqueItemController.setConnectedUser(connectedUser);
+            historiqueItemController.onSejourClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult != null){
+                    center_anchor.getChildren().clear();
+                    setStyleOnClick(sejours_btn);
+                    initSejourDetails(newResult);
+                }
+            });
+            center_anchor.getChildren().add(anchorPane);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initValidationMenuItem(){
+        try {
+            menu_title.setText(": Validation");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("validation-item.fxml"));
+            AnchorPane anchorPane = loader.load();
+            validationItemItemController = loader.getController();
+            validationItemItemController.setConnectedUser(connectedUser);
+            validationItemItemController.onSejourClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult != null){
+                    center_anchor.getChildren().clear();
+                    setStyleOnClick(sejours_btn);
+                    initSejourDetails(newResult);
+                }
+            });
             center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
@@ -261,6 +306,21 @@ public class Dashboard implements Initializable {
             loader.setLocation(Main.class.getResource("panier-item.fxml"));
             AnchorPane anchorPane = loader.load();
             panierItemController = loader.getController();
+            panierItemController.setConnectedUser(connectedUser);
+            panierItemController.onPanierClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult != null){
+                    center_anchor.getChildren().clear();
+                    setStyleOnClick(sejours_btn);
+                    initSejourDetails(newResult.sejour);
+                }
+            });
+            panierItemController.onValidateClickedProperty().addListener((obs, oldResult, newResult)->{
+                if (newResult){
+                    center_anchor.getChildren().clear();
+                    setStyleOnClick(validation_btn);
+                    initValidationMenuItem();
+                }
+            });
             center_anchor.getChildren().add(anchorPane);
         }catch (IOException e) {
             throw new RuntimeException(e);
@@ -286,21 +346,21 @@ public class Dashboard implements Initializable {
                 }
                 if(!dialogStage.isShowing()){
                     if (newResult.state == ResponseState.ERROR){
-                        dialogController.setDialogToShow("error");
+                        dialogController.setDialogToShow(DialogType.ERREUR_SERVER);
                         dialogController.resultProperty().addListener((d_obs, d_oldResult, d_newResult)->{
                             if (d_newResult){
                                 clearDialog();
                             }
                         });
-                    }else if(newResult.state == ResponseState.NOT_FOUND){
-                        dialogController.setDialogToShow("no_user_found");
+                    }else if(newResult.state == ResponseState.NOT_OK){
+                        dialogController.setDialogToShow(DialogType.NO_USER_FOUND);
                         dialogController.resultProperty().addListener((d_obs, d_oldResult, d_newResult)->{
                             if (d_newResult){
                                 clearDialog();
                             }
                         });
                     }else{
-                        dialogController.setDialogToShow("successfully_logged_in");
+                        dialogController.setDialogToShow(DialogType.SUCCESSFULLY_LOGGED_IN);
                         dialogController.resultProperty().addListener((d_obs, d_oldResult, d_newResult)->{
                             if (d_newResult){
                                 clearDialog();
@@ -364,31 +424,37 @@ public class Dashboard implements Initializable {
     }
 
     public void on_app_launched(){
-        login_hbox.setVisible(true);
-        logout_hbox.setVisible(false);
-        dashboard_btn.setVisible(false);
-        panier_btn.setVisible(false);
-        historique_btn.setVisible(false);
+        toggleItems();
         center_anchor.getChildren().clear();
         setStyleOnClick(sejours_btn);
         initSejoursMenuItem();
     }
 
-    public void on_user_logged_in(){
-        logout_hbox.setVisible(true);
-        dashboard_btn.setVisible(true);
-        panier_btn.setVisible(true);
-        historique_btn.setVisible(true);
-        setStyleOnClick(dashboard_btn);
-        initDashboardMenuItem();
+    public void toggleItems(){
+        login_hbox.setVisible(!isUserConnected());
+        logout_hbox.setVisible(isUserConnected());
+        dashboard_btn.setVisible(isUserConnected() && connectedUser.isHote());
+        panier_btn.setVisible(isUserConnected() && connectedUser.isVoyageur());
+        historique_btn.setVisible(isUserConnected());
+        validation_btn.setVisible(isUserConnected());
     }
 
+    public void on_user_logged_in(){
+       toggleItems();
+       if(isUserConnected()){
+           if(connectedUser.isHote()){
+               setStyleOnClick(dashboard_btn);
+               initDashboardMenuItem();
+           } else if (connectedUser.isVoyageur()) {
+               setStyleOnClick(sejours_btn);
+               initSejoursMenuItem();
+           }
+       }
+    }
+
+
     public void on_user_logged_out(){
-        logout_hbox.setVisible(false);
-        login_hbox.setVisible(true);
-        dashboard_btn.setVisible(false);
-        panier_btn.setVisible(false);
-        historique_btn.setVisible(false);
+        toggleItems();
         setStyleOnClick(sejours_btn);
         initSejoursMenuItem();
     }
@@ -406,31 +472,59 @@ public class Dashboard implements Initializable {
             initHistoriqueMenuItem();
         }else if(source == panier_btn){
             initPanierMenuItem();
+        } else if (source == validation_btn) {
+            initValidationMenuItem();
         }
 
         setStyleOnClick(source);
     }
 
     public void setStyleOnClick(Button source){
-        dashboard_btn.setStyle(getStyleOnClick(source, dashboard_btn));
-        historique_btn.setStyle(getStyleOnClick(source, historique_btn));
-        panier_btn.setStyle(getStyleOnClick(source, panier_btn));
-        sejours_btn.setStyle(getStyleOnClick(source, sejours_btn));
+        getStyleOnClick(source, dashboard_btn);
+        getStyleOnClick(source, historique_btn);
+        getStyleOnClick(source, panier_btn);
+        getStyleOnClick(source, sejours_btn);
+        getStyleOnClick(source, validation_btn);
     }
 
     private void setUserInfo(User user){
         connectedUser = user;
         username_lbl.setText(user.login);
-        System.out.print(user.image);
-        if(user != null && user.image != null){
+        if(user.image != null){
             profile_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/"+user.image))));
         }
+        setRoleStyle();
+        role_lbl.setText(Role.intToEnum(user.role).name());
 
+    }
+
+    public void setRoleStyle(){
+        if(isUserConnected()){
+            role_lbl.getStyleClass().remove("role-inconnu");
+            if(connectedUser.isVoyageur()){
+                role_lbl.getStyleClass().remove("role-hote");
+                role_lbl.getStyleClass().add("role-voyageur");
+            } else if (connectedUser.isHote()) {
+                role_lbl.getStyleClass().remove("role-voyageur");
+                role_lbl.getStyleClass().add("role-hote");
+            }
+        }else{
+            role_lbl.getStyleClass().remove("role-hote");
+            role_lbl.getStyleClass().remove("role-voyageur");
+            role_lbl.getStyleClass().add("role-inconnu");
+        }
+
+    }
+
+    public boolean isUserConnected(){
+        return connectedUser!=null;
     }
 
     private void clearUserInfo(){
         connectedUser = null;
         username_lbl.setText("User");
+        role_lbl.setText("Role");
         profile_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/admin.png"))));
+        setRoleStyle();
     }
 }

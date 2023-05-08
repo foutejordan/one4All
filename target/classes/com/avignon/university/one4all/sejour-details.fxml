@@ -2,21 +2,20 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="591.0" prefWidth="742.0" styleClass="bg" stylesheets="@styles/sejour-details.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.SejourDetails">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="261.0">
+      <AnchorPane layoutX="6.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="261.0">
          <children>
             <AnchorPane layoutX="54.0" layoutY="14.0" styleClass="bg-gradient">
                <children>
@@ -27,7 +26,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <VBox layoutX="14.0" layoutY="167.0" spacing="10.0">
+            <VBox layoutX="14.0" layoutY="167.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="230.0" spacing="10.0">
                <children>
                   <Label fx:id="title_lbl" prefHeight="37.0" prefWidth="230.0" text="Titre">
                      <font>
@@ -56,44 +55,155 @@
                         <String fx:value="nombre-personne" />
                      </styleClass>
                   </Label>
-                  <DatePicker fx:id="dateFin_dp" prefHeight="31.0" prefWidth="230.0" promptText="Date de fin">
+                  <Label fx:id="dateDebut_dp" layoutX="10.0" layoutY="151.0" prefHeight="37.0" prefWidth="230.0" text="Date de début">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
                      <styleClass>
-                        <String fx:value="bg-gradient" />
-                        <String fx:value="date" />
+                        <String fx:value="textfield" />
+                        <String fx:value="nombre-personne" />
                      </styleClass>
-                  </DatePicker>
-                  <DatePicker fx:id="dateDebut_dp" prefHeight="31.0" prefWidth="230.0" promptText="Date de début">
+                  </Label>
+                  <Label fx:id="dateFin_dp" layoutX="10.0" layoutY="104.0" prefHeight="37.0" prefWidth="230.0" text="Date defin">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
                      <styleClass>
-                        <String fx:value="bg-gradient" />
-                        <String fx:value="date" />
+                        <String fx:value="textfield" />
+                        <String fx:value="nombre-personne" />
                      </styleClass>
-                  </DatePicker>
+                  </Label>
+                  <Label fx:id="hote_lbl" layoutX="10.0" layoutY="198.0" prefHeight="37.0" prefWidth="230.0" text="Hote">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="textfield" />
+                        <String fx:value="nombre-personne" />
+                     </styleClass>
+                  </Label>
                </children>
             </VBox>
-            <Button layoutX="39.0" layoutY="406.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="184.0" styleClass="add-to-cart-btn" text="Ajouter au panier">
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/add_to_cart.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Hyperlink fx:id="create_account_btn" layoutX="53.0" layoutY="467.0" onAction="#goToList" text="Voir la liste des séjours" />
+            <Pane layoutX="39.0" layoutY="454.0">
+               <children>
+                  <Button fx:id="removeFromCart_btn" mnemonicParsing="false" onAction="#onRemoveFromCartBtnClicked" prefHeight="36.0" prefWidth="184.0" styleClass="remove-btn" stylesheets="@styles/sejour-card-remove.css" text="Retirer du Panier" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/remove-from-cart.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="addToCart_btn" mnemonicParsing="false" onAction="#onAddToCartBtnClicked" prefHeight="36.0" prefWidth="184.0" styleClass="add-to-cart-btn" text="Ajouter au panier">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/add_to_cart.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Hyperlink fx:id="create_account_btn" layoutX="14.0" layoutY="46.0" onAction="#goToList" text="Voir la liste des séjours" />
+               </children>
+            </Pane>
          </children>
          <styleClass>
             <String fx:value="bg-gradient" />
             <String fx:value="card-container" />
          </styleClass>
       </AnchorPane>
-      <ScrollPane layoutX="279.0" layoutY="8.0" prefHeight="579.0" prefWidth="459.0">
+      <ScrollPane layoutX="277.0" layoutY="61.0" prefHeight="368.0" prefWidth="459.0">
          <content>
-            <GridPane fx:id="sejours_container" prefHeight="36.0" prefWidth="0.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-            </GridPane>
+            <VBox fx:id="commentaires_vbox" prefHeight="443.0" prefWidth="457.0" spacing="10.0">
+               <children>
+                  <AnchorPane prefHeight="213.0" prefWidth="450.0" styleClass="bg-gradient" stylesheets="@styles/comment-sender.css">
+                     <children>
+                        <AnchorPane layoutX="26.0" layoutY="19.0" styleClass="bg-gradient">
+                           <children>
+                              <ImageView fitHeight="82.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/comment.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="140.0" layoutY="26.0" prefHeight="25.0" prefWidth="298.0" text="Author">
+                           <styleClass>
+                              <String fx:value="author" />
+                              <String fx:value="textfield" />
+                           </styleClass>
+                        </Label>
+                        <Label layoutX="140.0" layoutY="60.0" prefHeight="25.0" prefWidth="298.0" text="Date">
+                           <styleClass>
+                              <String fx:value="date" />
+                              <String fx:value="textfield" />
+                           </styleClass>
+                        </Label>
+                        <TextArea layoutX="137.0" layoutY="96.0" prefHeight="99.0" prefWidth="305.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="213.0" prefWidth="450.0" styleClass="bg-gradient" stylesheets="@styles/comment-receiver.css">
+                     <children>
+                        <AnchorPane layoutX="354.0" layoutY="15.0" styleClass="bg-gradient">
+                           <children>
+                              <ImageView fitHeight="82.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/comment.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="17.0" layoutY="22.0" prefHeight="25.0" prefWidth="298.0" text="Author">
+                           <styleClass>
+                              <String fx:value="author" />
+                              <String fx:value="textfield" />
+                           </styleClass>
+                        </Label>
+                        <Label layoutX="17.0" layoutY="56.0" prefHeight="25.0" prefWidth="298.0" text="Date">
+                           <styleClass>
+                              <String fx:value="date" />
+                              <String fx:value="textfield" />
+                           </styleClass>
+                        </Label>
+                        <TextArea layoutX="14.0" layoutY="92.0" prefHeight="99.0" prefWidth="305.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
          </content>
       </ScrollPane>
+      <Label layoutX="277.0" layoutY="14.0" prefHeight="37.0" prefWidth="204.0" text="Les commentaires">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="textfield" />
+            <String fx:value="titre" />
+         </styleClass>
+      </Label>
+      <Pane fx:id="addComment_pane" layoutX="269.0" layoutY="444.0">
+         <children>
+            <TextArea fx:id="comment_txtArea" layoutX="8.0" layoutY="50.0" prefHeight="85.0" prefWidth="371.0" />
+            <Label layoutX="8.0" prefHeight="37.0" prefWidth="204.0" text="Ajouter un commentaire">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="textfield" />
+                  <String fx:value="titre" />
+               </styleClass>
+            </Label>
+            <Button layoutX="406.0" layoutY="96.0" mnemonicParsing="false" onAction="#onAddCommentClicked" prefHeight="22.0" prefWidth="47.0" styleClass="add-to-cart-btn">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/send_comment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -207,7 +207,7 @@
             <String fx:value="bg-white" />
          </styleClass>
       </AnchorPane>
-      <AnchorPane fx:id="sucessfully_logged_in" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="434.0" stylesheets="@styles/dialog.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="sucessfully_logged_in" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="434.0" stylesheets="@styles/dialog.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="13.0" layoutY="50.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
                <children>
@@ -251,6 +251,128 @@
                </children>
             </AnchorPane>
             <Button fx:id="sucessfully_logged_in_ok_btn" layoutX="338.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick" styleClass="no-btn" stylesheets="@styles/dialog.css" text="Ok">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/erreur_ok.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="header" />
+            <String fx:value="bg-white" />
+         </styleClass>
+      </AnchorPane>
+      <AnchorPane fx:id="add_to_cart_success" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="434.0" stylesheets="@styles/dialog.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="50.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/successfully_logged_in.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <HBox fx:id="header_add_to_cart" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="433.0" spacing="10.0" styleClass="header" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/booking.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="23.0" prefWidth="240.0" text="One4All - Ajouter au panier">
+                     <font>
+                        <Font name="Century Gothic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <AnchorPane layoutX="109.0" layoutY="63.0" prefHeight="32.0" prefWidth="307.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="282.0" text="Ajouter au panier avec succès!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="add_to_cart_ok_btn" layoutX="338.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick" styleClass="no-btn" stylesheets="@styles/dialog.css" text="Ok">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/erreur_ok.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="header" />
+            <String fx:value="bg-white" />
+         </styleClass>
+      </AnchorPane>
+      <AnchorPane fx:id="remove_from_cart_success" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="434.0" stylesheets="@styles/dialog.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="50.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/crying_face.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <HBox fx:id="header_remove_cart" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="433.0" spacing="10.0" styleClass="header" stylesheets="@styles/dialog.css">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/booking.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="23.0" prefWidth="240.0" text="One4All - Retirer du panier">
+                     <font>
+                        <Font name="Century Gothic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <AnchorPane layoutX="109.0" layoutY="63.0" prefHeight="32.0" prefWidth="307.0" styleClass="bg-white" stylesheets="@styles/dialog.css">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="282.0" text="Retirer du panier avec succès!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="remove_from_cart_ok_btn" layoutX="338.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick" styleClass="ok-btn" stylesheets="@styles/dialog.css" text="Ok">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>

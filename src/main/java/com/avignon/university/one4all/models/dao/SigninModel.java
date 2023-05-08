@@ -34,11 +34,11 @@ public class SigninModel {
                     users.add(user);
                     result.response = users;
                     result.message = "Connection réussi";
-                    result.state = ResponseState.SUCCESS;
+                    result.state = ResponseState.OK;
                 }else{
                     result.response = null;
                     result.message = "Pas d'utilisateur avec ces  identifiants";
-                    result.state = ResponseState.NOT_FOUND;
+                    result.state = ResponseState.NOT_OK;
                 }
             } catch (SQLException e) {
                 Logger.getAnonymousLogger().log(

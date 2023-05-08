@@ -15,6 +15,7 @@ public class User {
         this.role = role;
     }
 
+
     public User(String login, String password, int role, String image) {
         this.login = login;
         this.password = password;
@@ -36,5 +37,18 @@ public class User {
 
     public String getImage() {
         return image;
+    }
+
+    public boolean isHote(){
+        return role == Role.HOTE.getValue();
+    }
+
+    public boolean isVoyageur(){
+        return role == Role.VOYAGEUR.getValue();
+    }
+
+    @Override
+    public String toString() {
+        return login;
     }
 }

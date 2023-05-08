@@ -12,4 +12,13 @@ public class QueryResponse {
         response = null;
         state = ResponseState.ERROR;
     }
+
+    @Override
+    public String toString() {
+        return "QueryResponse{" +
+                "message='" + message + '\'' +
+                ", response=" + response +
+                ", state=" + state +
+                '}';
+    }
 }

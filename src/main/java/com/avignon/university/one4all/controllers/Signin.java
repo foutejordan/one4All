@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -56,11 +58,33 @@ public class Signin implements Initializable {
     }
 
     @FXML
+    private Hyperlink hide_password_btn;
+    @FXML
     public void onShowPasswordClicked(ActionEvent event){
-        password_content_textfield.setText(password_textfield.getText());
+
         password_textfield.setVisible(!password_textfield.isVisible());
         password_content_textfield.setVisible(!password_content_textfield.isVisible());
-        show_password_checkbox.setSelected(!show_password_checkbox.isSelected());
+        show_password_btn.setVisible(!show_password_btn.isVisible());
+        hide_password_btn.setVisible(!hide_password_btn.isVisible());
+        if(event.getSource() == show_password_btn || event.getSource() == hide_password_btn){
+            show_password_checkbox.setSelected(!show_password_checkbox.isSelected());
+        }
+    }
+
+    public void onKeyReleasedInHiddenPwd(KeyEvent event){
+        String pwd = password_content_textfield.getText();
+        password_textfield.setText(pwd);
+    }
+
+    public void onKeyReleasedInPwd(KeyEvent event){
+        String pwd = password_textfield.getText();
+        password_content_textfield.setText(pwd);
+    }
+
+    public void onEnterKeyPressed(KeyEvent event){
+        if(event.getCode() == KeyCode.ENTER){
+            onLoggedInClicked();
+        }
     }
 
     private final ReadOnlyObjectWrapper<Boolean> isCreateAccountClicked = new ReadOnlyObjectWrapper<>();
@@ -80,7 +104,7 @@ public class Signin implements Initializable {
         isCreateAccountClicked.set(true);
     }
 
-    public void onLoggedInClicked(ActionEvent event){
+    public void onLoggedInClicked(){
         String username = username_textfield.getText();
         String password = password_textfield.getText();
         QueryResponse response = SigninModel.signin(username, password);

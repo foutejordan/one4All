@@ -1,7 +1,5 @@
 package com.avignon.university.one4all.models.dao;
 
-import com.avignon.university.one4all.models.Panier;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -58,7 +56,7 @@ public class Database {
     }
 
     public static void deleteAllTables(){
-        String tables[] = {"Sejour", "Users", "Comments", "Panier", "Reservations"};
+        String tables[] = {"Sejours", "Users", "Comments", "Paniers", "Historiques"};
 
         try (Connection connection = Database.connect("one4All.sqlite")) {
             for (String table_name:tables) {
@@ -75,9 +73,8 @@ public class Database {
         }
     }
 
-    // le role c'est soit 1 = hote , 2 = persosnne connecte ou 3=particuluer,
-    public static  void createStaysTable() {
-        String query = "CREATE TABLE IF NOT EXISTS Sejour (" +
+    public static  void createSejoursTable() {
+        String query = "CREATE TABLE IF NOT EXISTS Sejours (" +
                 "id INTEGER  NOT NULL PRIMARY KEY ," +
                 "idHote INTEGER ," +
                 "date_debut TEXT," +
@@ -120,12 +117,11 @@ public class Database {
         }
     }
 
-    public static  void createBasketsTable() {
-        String query = "CREATE TABLE IF NOT EXISTS Panier (" +
+    public static  void createPaniersTable() {
+        String query = "CREATE TABLE IF NOT EXISTS Paniers (" +
                 "id INTEGER  NOT NULL PRIMARY KEY ," +
                 "idSejour INTEGER," +
                 "idUser INTEGER," +
-                "statut INTEGER," +
                 "FOREIGN KEY (idUser) REFERENCES Users (id)," +
                 "FOREIGN KEY (idSejour) REFERENCES Sejour (id) )";
         try (Connection connection = Database.connect("one4All.sqlite")) {
@@ -139,16 +135,23 @@ public class Database {
         }
     }
 
-    public static  void createReservationTable() {
-        String query = "CREATE TABLE IF NOT EXISTS Reservations (" +
+    public static  void createHistoriquesTable() {
+        String query = "CREATE TABLE IF NOT EXISTS Historiques (" +
                 "id INTEGER  NOT NULL PRIMARY KEY ," +
-                "idSejour INTEGER," +
+                "idSejour INTEGER ," +
+                "idHote INTEGER ," +
+                "idUser INTEGER ," +
+                "date_debut TEXT," +
+                "date_fin TEXT ," +
+                "prix REAL ," +
+                "lieux TEXT," +
+                "titre TEXT," +
+                "nbrePersonnes INTEGER, " +
+                "image TEXT," +
                 "statut INTEGER," +
-                "idUser INTEGER," +
-                "idHote INTEGER," +
-                "FOREIGN KEY (idUser) REFERENCES Users (id)," +
-                "FOREIGN KEY (idHote) REFERENCES Users (id)," +
-                "FOREIGN KEY (idSejour) REFERENCES Sejour (id) )";
+                "FOREIGN KEY (idSejour) REFERENCES Sejours (id),"+
+                "FOREIGN KEY (idUser) REFERENCES Users (id),"+
+                "FOREIGN KEY (idHote) REFERENCES Users (id) )";
         try (Connection connection = Database.connect("one4All.sqlite")) {
             Statement statement = connection.createStatement();
             statement.execute(query);
@@ -166,18 +169,18 @@ public class Database {
                 Database.deleteAllTables();
             }
 
-
             Database.createUsersTable();
-            Database.createStaysTable();
+            Database.createSejoursTable();
             Database.createCommentsTable();
-            Database.createBasketsTable();
-            Database.createReservationTable();
+            Database.createPaniersTable();
+            Database.createHistoriquesTable();
 
             if(reset){
-                userModel.initUsersTable(10);
-                SejourModel.initSejourTable(50);
-                CommentModel.initCommentTable(20);
-                panierModel.initPanierTable(10);
+                UserModel.initUsersTable(20);
+                SejourModel.initSejoursTable(100);
+                CommentModel.initCommentsTable(20);
+                PanierModel.initPaniersTable(30);
+                HistoriqueModel.initHistoriquesTable(20);
             }
 
         }

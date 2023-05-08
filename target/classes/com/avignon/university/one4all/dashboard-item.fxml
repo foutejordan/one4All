@@ -30,7 +30,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="2" textFill="WHITE">
+                        <Label fx:id="nbReservation_lbl" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="2" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -57,7 +57,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="90.00 €" textFill="WHITE">
+                        <Label fx:id="montant_lbl" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="90.00 €" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -86,7 +86,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="20" textFill="WHITE">
+                  <Label fx:id="nbSejours_lbl" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="20" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -115,7 +115,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="10" textFill="WHITE">
+                        <Label fx:id="nbDisponible_lbl" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="10" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -142,7 +142,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="1" textFill="WHITE">
+                        <Label fx:id="enCours_lbl" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="22.0" prefHeight="23.0" prefWidth="141.0" text="1" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

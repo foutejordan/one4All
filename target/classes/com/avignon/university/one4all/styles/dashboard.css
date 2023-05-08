@@ -49,6 +49,10 @@
     -fx-background-color: #ae2d3c;
 }
 
+.menu-btn-selected{
+    -fx-background-color:#ae2d3c;
+}
+
 .hyperlink-signin, .hyperlink-signout{
     -fx-underline: false;
     -fx-text-fill: #fff;
@@ -84,4 +88,21 @@
 }
 .signin-btn:hover{
     -fx-background-color: #3ea185;
+}
+
+.role{
+    -fx-font-size: 14px;
+    -fx-background-radius: 20px;
+}
+
+.role-inconnu{
+    -fx-background-color: #1f2f80;
+}
+
+.role-hote{
+    -fx-background-color: #3ea185;
+}
+
+.role-voyageur{
+    -fx-background-color: #96692b;
 }

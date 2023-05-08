@@ -7,30 +7,29 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="213.0" prefWidth="450.0" styleClass="bg-gradient" stylesheets="@styles/comment-sender.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.CommentSender">
+<AnchorPane prefHeight="203.0" prefWidth="443.0" styleClass="bg-gradient" stylesheets="@styles/comment-sender.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avignon.university.one4all.controllers.CommentSender">
    <children>
-      <AnchorPane layoutX="26.0" layoutY="19.0" styleClass="bg-gradient">
+      <AnchorPane layoutX="24.0" layoutY="16.0" styleClass="bg-gradient">
          <children>
-            <ImageView fitHeight="82.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar_iv" fitHeight="82.0" fitWidth="97.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/comment.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="140.0" layoutY="26.0" prefHeight="25.0" prefWidth="298.0" text="Author">
+      <Label fx:id="author_lbl" layoutX="118.0" layoutY="19.0" prefHeight="25.0" prefWidth="298.0" text="Author">
          <styleClass>
             <String fx:value="author" />
             <String fx:value="textfield" />
          </styleClass>
       </Label>
-      <Label layoutX="140.0" layoutY="60.0" prefHeight="25.0" prefWidth="298.0" text="Date">
+      <Label fx:id="date_lbl" layoutX="119.0" layoutY="53.0" prefHeight="25.0" prefWidth="298.0" text="Date">
          <styleClass>
             <String fx:value="date" />
             <String fx:value="textfield" />
          </styleClass>
       </Label>
-      <TextArea layoutX="137.0" layoutY="96.0" prefHeight="99.0" prefWidth="305.0" />
+      <TextArea fx:id="message_textArea" editable="false" layoutX="120.0" layoutY="85.0" prefHeight="99.0" prefWidth="305.0" />
    </children>
 </AnchorPane>

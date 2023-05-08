@@ -1,5 +1,6 @@
 package com.avignon.university.one4all.controllers;
 
+import com.avignon.university.one4all.models.DialogType;
 import com.github.javafaker.Bool;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -50,7 +51,7 @@ public class Dialog implements Initializable {
     @FXML
     private HBox erreur_header;
 
-    private String type;
+    private DialogType type;
 
     @FXML
     private HBox header_sucessfully_logged_in;
@@ -60,6 +61,18 @@ public class Dialog implements Initializable {
 
     @FXML
     private Button sucessfully_logged_in_ok_btn;
+
+    @FXML
+    private Button add_to_cart_ok_btn;
+
+    @FXML
+    private AnchorPane add_to_cart_success;
+
+    @FXML
+    private Button remove_from_cart_ok_btn;
+
+    @FXML
+    private AnchorPane remove_from_cart_success;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,25 +92,44 @@ public class Dialog implements Initializable {
             result.set(true);
         }else if(event.getSource() == sucessfully_logged_in_ok_btn){
             result.set(true);
+        }else if(event.getSource() == add_to_cart_ok_btn){
+            result.set(true);
+        }else if(event.getSource() == remove_from_cart_ok_btn){
+            result.set(true);
         }
     }
+
+    @FXML
+    private HBox header_add_to_cart;
+
+    @FXML
+    private HBox header_remove_cart;
 
     public void closeDialog(){
         Stage stage = null;
         switch (type){
-            case "fermeture":
+            case FERMETURE:
                 stage = (Stage)header.getScene().getWindow();
                 break;
-            case "erreur":
+            case ERREUR_SERVER:
                 stage = (Stage)erreur_header.getScene().getWindow();
                 break;
-            case "no_user_found":
+            case NO_USER_FOUND:
                 stage = (Stage)header_no_user_found.getScene().getWindow();
                 break;
-
-            case "successfully_logged_in":
+            case SUCCESSFULLY_LOGGED_IN:
                 stage = (Stage)sucessfully_logged_in.getScene().getWindow();
                 break;
+
+            case AJOUTER_AU_PANIER:
+                stage = (Stage)header_add_to_cart.getScene().getWindow();
+                break;
+
+            case RETIRER_DU_PANIER:
+                stage = (Stage)header_remove_cart.getScene().getWindow();
+                break;
+
+
         }
         if(stage!=null){
             stage.close();
@@ -115,12 +147,14 @@ public class Dialog implements Initializable {
         return result.get();
     }
 
-    public void setDialogToShow(String dialog){
+    public void setDialogToShow(DialogType dialog){
         type = dialog;
-        fermeture.setVisible(dialog.equals("fermeture"));
-        erreur.setVisible(dialog.equals("erreur"));
-        no_user_found.setVisible(dialog.equals("no_user_found"));
-        sucessfully_logged_in.setVisible(dialog.equals("successfully_logged_in"));
+        fermeture.setVisible(dialog == DialogType.FERMETURE);
+        erreur.setVisible(dialog == DialogType.ERREUR_SERVER);
+        no_user_found.setVisible(dialog == DialogType.NO_USER_FOUND);
+        sucessfully_logged_in.setVisible(dialog == DialogType.SUCCESSFULLY_LOGGED_IN);
+        add_to_cart_success.setVisible(dialog == DialogType.AJOUTER_AU_PANIER);
+        remove_from_cart_success.setVisible(dialog == DialogType.RETIRER_DU_PANIER);
     }
 
 }

@@ -1,7 +1,9 @@
 package com.avignon.university.one4all.controllers;
 
 import com.avignon.university.one4all.Main;
+import com.avignon.university.one4all.models.MenuItemType;
 import com.avignon.university.one4all.models.Sejour;
+import com.avignon.university.one4all.models.User;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
@@ -12,15 +14,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class SejourCard implements Initializable {
 
     @FXML
-    private DatePicker dateDebut_dp;
+    private Label dateDebut_lbl;
 
     @FXML
-    private DatePicker dateFin_dp;
+    private Label dateFin_lbl;
 
     @FXML
     private ImageView image_iv;
@@ -37,7 +40,11 @@ public class SejourCard implements Initializable {
     @FXML
     private Label prix_lbl;
 
+    @FXML
+    private Label hote_lbl;
+
     private Sejour sejour;
+
 
     private final ReadOnlyObjectWrapper<Sejour> onSejourClicked = new ReadOnlyObjectWrapper<>();
 
@@ -49,6 +56,11 @@ public class SejourCard implements Initializable {
 
     }
 
+    private MenuItemType menuItemType;
+    public void setMenuItemType(MenuItemType menuItemType){
+        this.menuItemType = menuItemType;
+
+    }
     public void setSejour(Sejour sejour){
         if(sejour != null){
             this.sejour = sejour;
@@ -58,14 +70,24 @@ public class SejourCard implements Initializable {
             if(sejour.getImage()!=null && !sejour.image.isEmpty()){
                 image_iv.setImage(new Image(String.valueOf(Main.class.getResource("images/"+sejour.getImage()))));
             }
-            dateDebut_dp.setValue(sejour.dateDebut.toLocalDate());
-            dateFin_dp.setValue(sejour.dateFin.toLocalDate());
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String dateDebut = formatter.format(sejour.dateDebut);
+            dateDebut_lbl.setText("Date de début: "+dateDebut);
+            String dateFin = formatter.format(sejour.dateFin);
+            dateFin_lbl.setText("Date de fin: "+dateFin);
             prix_lbl.setText("Prix: € "+sejour.prix);
+            hote_lbl.setText("Hôte: "+sejour.hote.login);
+
         }
     }
 
     public Sejour getSejour() {
         return sejour;
+    }
+
+    private User connectedUser = null;
+    public void setConnectedUser(User user){
+        connectedUser = user;
     }
 
     @FXML
